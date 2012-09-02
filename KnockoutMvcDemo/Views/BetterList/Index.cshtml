@@ -1,0 +1,24 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.BetterListModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+@using (ko.Html.Form("AddItem", "BetterList", null, new {id = "myform"}))
+{
+  <span>Add item: @ko.Html.TextBox(m => m.ItemToAdd).ValueUpdate(KnockoutValueUpdateKind.AfterKeyDown)</span>        
+  <button type="submit" @ko.Bind.Enable(m => m.ItemToAdd.Length > 0)>Add</button>
+
+  <p>Your values:</p>
+  @ko.Html.ListBox(m => m.AllItems, new {width = 100, size = 10}).SelectedOptions(m => m.SelectedItems)
+
+  <div>
+    @ko.Html.Button("Remove", "RemoveSelected", "BetterList").Enable(m => m.SelectedItems.Count > 0)
+    @ko.Html.Button("Sort", "SortItems", "BetterList").Enable(m => m.AllItems.Count > 1)
+  </div>
+}
+
+<script type="text/javascript">
+    $('#myform').ajaxForm();
+</script>
+
+@ko.Apply(Model)

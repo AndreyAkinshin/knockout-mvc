@@ -1,0 +1,63 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.RegionModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<h3>If</h3>
+if<br />
+Condition1: @ko.Html.CheckBox(m => m.Condition1)<br />
+Condition2: @ko.Html.CheckBox(m => m.Condition2)<br />
+then<br />
+@using (ko.If(model => model.Condition1 && model.Condition2))
+{
+  <p>Condition1 and Condition2</p>
+}
+@using (ko.If(model => model.Condition1 || model.Condition2))
+{
+  <p>Condition1 or Condition2</p>
+}
+@using (ko.If(model => model.Condition1 ^ model.Condition2))
+{
+  <p>Condition1 xor Condition2</p>
+}
+@using (ko.If(model => model.Condition1))
+{
+  <p>Condition1</p>
+}
+@using (ko.If(model => model.Condition2))
+{
+  <p>Condition2</p>
+}
+@using (ko.If(model => !model.Condition1))
+{
+  <p>Not Condition1</p>
+}
+@using (ko.If(model => !model.Condition2))
+{
+  <p>Not Condition2</p>
+}
+<h3>Foreach</h3>
+<table>
+  <tr>
+    <th>№</th>
+    <th>Value</th>
+  </tr>
+  @using (var items = ko.Foreach(m => m.Items))
+  {
+    <tr>
+      <td @items.Bind.Text(items.GetIndex())>
+      </td>
+      <td @items.Bind.Text(m => m)>
+      </td>
+    </tr>
+  }
+</table>
+<h3>With</h3>
+@using (var subModel = ko.With(m => m.SubModel))
+{
+  using (var subSubModel = subModel.With(m => m.SubSubModel))
+  {
+  @subSubModel.Html.Span(m => ko.Model.ModelName + " " + subModel.Model.SubModelName + " " + m.SubSubModelName)
+  }
+}
+@ko.Apply(Model)

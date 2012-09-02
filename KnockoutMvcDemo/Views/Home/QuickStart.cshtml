@@ -1,0 +1,41 @@
+﻿@{
+  ViewBag.Title = "Quick start";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="well">
+  <h2>Quick start</h2>
+  <ul>
+    <li>Add reference to <code>PerpetuumSoft.Knockout</code></li>
+    <li>Add next line to <code>Application_Start()</code> in <code>Global.asax</code>:
+      <pre class="prettyprint lang-cs">
+ModelBinders.Binders.DefaultBinder = new KnockoutModelBinder();</pre>
+    </li>
+    <li>Add links to next js-files:
+      <pre class="prettyprint lang-xml">
+&lt;script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="@Url.Content("~/Scripts/knockout-2.1.0.js")" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="@Url.Content("~/Scripts/perpetuum.knockout.js")" type="text/javascript"&gt;&lt;/script&gt;</pre>
+    </li>
+    <li>Use next template for view:
+      <pre class="prettyprint lang-cs">
+&#64;using PerpetuumSoft.Knockout
+&#64;model &lt;!-- You model --&gt;
+&#64;{
+  var ko = Html.CreateKnockoutContext();
+}
+&lt;!-- Your page --&gt;
+
+&#64;ko.Apply(Model)</pre>
+    </li>
+    <li>Inherit your controller from <code>KnockoutController:</code>
+      <pre class="prettyprint lang-cs">
+public class FooController : KnockoutController {
+  public ActionResult Index()
+  {    
+    return View();
+  }
+}</pre>
+    </li>
+  </ul>
+</div>

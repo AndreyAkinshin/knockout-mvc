@@ -1,0 +1,37 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.GiftListModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<p>You have asked for @ko.Html.Span(m => m.Gifts.Count) gift(s)</p>
+<form id="myform">
+<table>
+    <tbody>
+      @using (var items = ko.Foreach(m => m.Gifts))
+      {
+        <tr>
+          <td>Gift name:@items.Html.TextBox(item => item.Title, new { @class = "required" }).UniqueName()</td>
+          <td>Price: $@items.Html.TextBox(item => item.Price, new { @class = "required number" }).UniqueName()</td>
+          <td>@ko.Html.Button("Delete", "RemoveGift", "GiftList", new { index = items.GetIndex() })</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @ko.Html.Button("Add", "AddGift", "GiftList")  
+  <button @ko.Bind.Enable(m => m.Gifts.Count > 0) type="submit">Save</button>  
+</form>
+@using (ko.If(m => m.ServerTime.Length > 0))
+{
+  <p>Saved at @ko.Html.Span(m => m.ServerTime)</p>
+}
+<script type="text/javascript">
+    $("#myform").ajaxForm();
+    $("#myform").validate({ submitHandler: function () { @ko.ServerAction("Save", "GiftList"); } });
+</script>
+<style scoped="scoped">
+  input.error { border: 1px solid red; background-color: #FDC; }
+  label.error { display: block; color: Red; font-size: 0.8em; }
+</style>
+
+@ko.Apply(Model)

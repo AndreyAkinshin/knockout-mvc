@@ -1,0 +1,13 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.ClickCounterModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<div>You've clicked @ko.Html.Span(m => m.NumberOfClicks) times</div>
+@ko.Html.Button("Click me", "RegisterClick", "ClickCounter").Disable(m => m.HasClickedTooManyTimes())
+<div @ko.Bind.Visible(m => m.HasClickedTooManyTimes())>
+  That's too many clicks! Please stop before you wear out your fingers.
+  @ko.Html.Button("Reset clicks", "ResetClicks", "ClickCounter")  
+</div>
+
+@ko.Apply(Model)

@@ -1,0 +1,28 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.InnerComputedModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<table>
+  <tr>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>FullName</th>
+  </tr>
+  @using (var items = ko.Foreach(m => m.Items))
+  {
+    <tr>
+      <td>
+        @items.Html.Span(m => m.FirstName)
+      </td>
+      <td>
+        @items.Html.Span(m => m.LastName)
+      </td>
+      <td>
+        @items.Html.Span(m => m.FullName())
+      </td>
+    </tr>
+  }
+</table>
+
+@ko.Apply(Model)

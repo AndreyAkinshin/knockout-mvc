@@ -1,0 +1,12 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.ComplexBindingModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<h3>Model:</h3>
+Price: @ko.Html.TextBox(m => m.Price) (red color for &lt;= 0, black color for &gt;0)<br />
+FontSize: @ko.Html.TextBox(m => m.FontSize)<br />
+<h3>Bindings:</h3>
+Price: @ko.Html.Span(m => m.Price).Style("color", m => m.Price > 0 ? "black" : "red").Style("fontSize", m => m.FontSize)
+
+@ko.Apply(Model)

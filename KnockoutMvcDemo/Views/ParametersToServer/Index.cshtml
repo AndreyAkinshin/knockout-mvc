@@ -1,0 +1,17 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.ParametersToServerModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+Number : @ko.Html.Span(m => m.Number)<br />
+@ko.Html.Button("Inc 1", "Increment", "ParametersToServer", new { value = 1 })
+@ko.Html.Button("Inc 2", "Increment", "ParametersToServer", new { value = 2 })
+@ko.Html.Button("Inc 3", "Increment", "ParametersToServer", new { value = 3 })
+<br />
+<br />
+String: @ko.Html.Span(m => m.String)<br />
+@ko.Html.HyperlinkButton("Add 1 'a'", "AddToString", "ParametersToServer", new { letter = 'a', count = 1 })<br />
+@ko.Html.HyperlinkButton("Add 2 'b'", "AddToString", "ParametersToServer", new { letter = 'b', count = 2 })<br />
+@ko.Html.HyperlinkButton("Add 3 'c'", "AddToString", "ParametersToServer", new { letter = 'c', count = 3 })
+
+@ko.Apply(Model)

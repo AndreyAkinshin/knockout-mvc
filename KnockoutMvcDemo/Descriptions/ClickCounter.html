@@ -1,0 +1,10 @@
+﻿<p>This sample shows how to create a simple model and apply multiple bindings that
+  define view appearance depending on the certain state.</p>
+<p>The sample calculates button clicks. When button is clicked 3 times it becomes
+  inactive, instead the other button providing the ability to reset clicks number
+  appears. Logic of click count is hosted on the server and is set by <code>RegisterClick</code>
+  and <code>ResetClicks</code> methods. <code>HasClickedTooManyTimes</code> computed
+  property is subscribed for the the property containing the number of clicks <code>
+    NumberOfClicks</code>. It manages availability of the main button and ability
+  to reset click number.</p>
+The original example: <a href="http://knockoutjs.com/examples/clickCounter.html">http://knockoutjs.com/examples/clickCounter.html</a>

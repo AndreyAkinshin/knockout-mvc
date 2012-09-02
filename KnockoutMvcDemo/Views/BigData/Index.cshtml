@@ -1,0 +1,12 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.BigDataModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<h3>Start</h3>
+Content:
+@ko.Html.Span(m => m.Key)
+@ko.Html.Span("loading...").Visible(m => !Convert.ToBoolean(m.Key))
+<h3>End</h3>
+
+@ko.LazyApply(Model, "InitialData", "BigData")

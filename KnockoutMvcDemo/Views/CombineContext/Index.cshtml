@@ -1,0 +1,15 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.CombineContextModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<h2>CombineContext</h2>
+@using (var items = ko.Foreach(m => m.Items))
+{
+  using (var subItems = items.Foreach(m => m.SubItems))
+  {
+    @subItems.Html.Span(m => ko.Model.Key + " " + items.Model.Caption + " " + m.Name)<br />
+  }
+}
+
+@ko.Apply(Model)

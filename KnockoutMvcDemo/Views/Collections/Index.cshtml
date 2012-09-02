@@ -1,0 +1,28 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.CollectionsModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<ul>
+  @using (var people = ko.Foreach(m => m.People))
+  {    
+    <li>
+      <div>
+        @people.Html.Span(m => m.Name) has @people.Html.Span(m => m.Children.Count) children:
+        @ko.Html.Button("Add child", "AddChild", "Collections", new { index = people.GetIndex() })
+      </div>
+      <ul>
+        @using (var children = people.Foreach(m => m.Children))
+        {
+          <li>
+            @children.Html.Span(m => m)
+            <span @ko.Bind.Visible(m => m.ShowRenderTime)>(child rendered at @ko.Html.SpanInline("new Date().getSeconds()"))
+            </span></li>
+        }
+      </ul>
+    </li>
+  }
+</ul>
+@ko.Html.CheckBox(m => m.ShowRenderTime) Show render times
+
+@ko.Apply(Model)

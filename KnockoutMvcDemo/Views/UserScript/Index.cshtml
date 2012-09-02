@@ -1,0 +1,18 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.UserScriptModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+Message: @ko.Html.TextBox(m => m.Message) <br />
+@ko.Html.Button("Add letter", "AddLetter", "UserScript")
+<button data-bind="click: reverse">Reverse</button>
+
+@ko.Initialize(Model)
+<script type="text/javascript">
+  String.prototype.reverse = function () { return this.split("").reverse().join(""); };
+
+  viewModel.reverse = function () {
+    viewModel.Message(viewModel.Message().reverse());
+  };
+</script>
+@ko.Apply(Model)

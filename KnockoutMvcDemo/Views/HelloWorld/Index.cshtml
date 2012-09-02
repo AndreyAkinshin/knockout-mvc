@@ -1,0 +1,10 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.HelloWorldModel           
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<p>First name: @ko.Html.TextBox(m => m.FirstName)</p>
+<p>Last name: @ko.Html.TextBox(m => m.LastName)</p>
+<h2>Hello, @ko.Html.Span(m => m.FullName())!</h2>
+
+@ko.Apply(Model)

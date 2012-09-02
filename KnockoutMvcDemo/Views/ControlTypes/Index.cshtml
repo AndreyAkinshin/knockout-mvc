@@ -1,0 +1,92 @@
+﻿@using PerpetuumSoft.Knockout
+@model KnockoutMvcDemo.Models.ControlTypesModel
+@{
+  var ko = Html.CreateKnockoutContext();
+}
+<table id="maintable">
+  <tr>
+    <td>
+      <h3>HTML controls</h3>
+      <table>
+        <tr>
+          <td>Text value (updates on change):</td>
+          <td>@ko.Html.TextBox(m => m.StringValue)</td>
+        </tr>
+        <tr>
+          <td>Text value (updates on keystroke):</td>
+          <td>@ko.Html.TextBox(m => m.StringValue).ValueUpdate(KnockoutValueUpdateKind.AfterKeyDown)</td>
+        </tr>
+        <tr>
+          <td>Text value (multi-line):</td>
+          <td>@ko.Html.TextArea(m => m.StringValue)</td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td>@ko.Html.Password(m => m.PasswordValue)</td>
+        </tr>
+        <tr>
+          <td>Checkbox:</td>
+          <td>@ko.Html.CheckBox(m => m.BooleanValue)</td>
+        </tr>
+        <tr>
+          <td>Drop-down list:</td>
+          <td><select @ko.Bind.Options(m => m.OptionValue).Value(m => m.SelectedOptionValue)></select></td>
+        </tr>
+        <tr>
+          <td>Multi-select drop-down list:</td>
+          <td>@ko.Html.ListBox(m => m.OptionValue).SelectedOptions(m => m.MultipleSelectedOptionValues)</td>
+        </tr>
+        <tr>
+          <td>Radio buttons:</td>
+          <td>
+            @ko.Html.RadioButton(m => m.RadioSelectedOptionValue, new { value = "Alpha" }) Alpha
+            @ko.Html.RadioButton(m => m.RadioSelectedOptionValue, new { value = "Beta" }) Beta
+            @ko.Html.RadioButton(m => m.RadioSelectedOptionValue, new { value = "Gamma" }) Gamma
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <h3>What's in the model?</h3>
+      <table>
+        <tr>
+          <td>Text value:</td>
+          <td @ko.Bind.Text(m => m.StringValue)></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td @ko.Bind.Text(m => m.PasswordValue)></td>
+        </tr>
+        <tr>
+          <td>Bool value:</td>
+          <td @ko.Bind.Text(m => m.BooleanValue ? "True" : "False")></td>
+        </tr>
+        <tr>
+          <td>Selected option:</td>
+          <td @ko.Bind.Text(m => m.SelectedOptionValue)></td>
+        </tr>
+        <tr>
+          <td>Multi-selected options:</td>
+          <td @ko.Bind.Text(m => m.MultipleSelectedOptionValues)></td>
+        </tr>
+        <tr>
+          <td>Radio button selection:</td>
+          <td @ko.Bind.Text(m => m.RadioSelectedOptionValue)></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<style scoped="scoped">
+  #maintable
+  {
+    border-collapse: separate;
+    border-spacing: 15px;
+  }
+  #maintable td
+  {
+    vertical-align: top;
+  }
+</style>
+
+@ko.Apply(Model)

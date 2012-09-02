@@ -1,0 +1,577 @@
+﻿@{
+  ViewBag.Title = "Documentation";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section RightMenu
+{
+  <ul class="nav">
+    <li><a href="#context">Context</a></li>
+    <li><a href="#binding">Binding</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#advanced">Advanced</a></li>
+  </ul>
+}
+<h2>Documentation</h2>
+<article id="context">
+  <h3>Working with KnockoutContext</h3>
+  <p>Main object of forming View is instance of the <code>KnockoutContext</code> class.
+    It is necessary to create it in the beginning of the view using the following line:</p>
+  <pre class="prettyprint lang-cs">var ko = Html.CreateKnockoutContext();</pre>
+  <p>At the end of view, it is necessary to apply the formed data binding. You can do
+    it in the following way:</p>
+  <pre class="prettyprint lang-cs">&#64;ko.Apply(Model)</pre>
+  <p>If you have much data and need some time to load it, it makes sense to use lazy
+    analogue (in this case a page will load first, and then additional ajax query will
+    load all data):</p>
+  <pre class="prettyprint lang-cs">&#64;ko.LazyApply(Model, "GetDataAction", "ControllerName")</pre>
+  <p>So, common view template looks in the following way:</p>
+  <pre class="prettyprint lang-cs">
+&#64;using PerpetuumSoft.Knockout
+&#64;model &lt;!-- You model --&gt;
+&#64;{
+  var ko = Html.CreateKnockoutContext();
+}
+&lt;!-- Your page --&gt;
+
+&#64;ko.Apply(Model)
+</pre>
+</article>
+<article id="binding">
+  <h3>Basic data binding</h3>
+  <p>It is possible to bind data using <code>ko.Bind</code>.Lambda expressions that
+    view the initial model as some its property or expression are passed to the methods
+    of this object. Here and further in the documentation we will use source Razor constructions
+    and then show resulting html they are converted to:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&lt;span &#64;ko.Bind.Text(m => m.MyText)&gt;
+<span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text: MyText"&gt;
+</pre>
+  <p>It is possible to apply multiple data bindings to the element:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&lt;span &#64;ko.Bind.Text(m => m.MyText).Visible(m => m.MyVisible).Style("fontSize", m => m.MyFontSize)&gt;
+<span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text: MyText, visible: MyVisible, style: {fontSize : MyFontSize}"&gt;
+</pre>
+  <p>You can define the following properties using data bindings (every property features
+    reference to its official Knockout specification):</p>
+  <ul>
+    <li><code>Visible</code> (<a href="http://knockoutjs.com/documentation/visible-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Visible(m => m.MyVisible)
+<span class="nocode">Html: &nbsp;</span>data-bind="visible: myVisible"
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Visible(m => !Convert.ToBoolean(m.MyInt))
+<span class="nocode">Html: &nbsp;</span>data-bind="visible: !MyInt"
+</pre>
+    </li>
+    <li><code>Text</code> (<a href="http://knockoutjs.com/documentation/text-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Text(m => m.MyText)
+<span class="nocode">Html: &nbsp;</span>data-bind="text: MyText"
+</pre>
+    </li>
+    <li><code>Html</code> (<a href="http://knockoutjs.com/documentation/html-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Html(m => m.MyHtml)
+<span class="nocode">Html: &nbsp;</span>data-bind="html: MyHtml"
+</pre>
+    </li>
+    <li><code>Value</code> (<a href="http://knockoutjs.com/documentation/value-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Value(m => m.MyValue)
+<span class="nocode">Html: &nbsp;</span>data-bind="value: MyValue"
+</pre>
+    </li>
+    <li><code>Disable</code> (<a href="http://knockoutjs.com/documentation/disable-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Disable(m => m.MyDisable)
+<span class="nocode">Html: &nbsp;</span>data-bind="disable: MyDisable"
+</pre>
+    </li>
+    <li><code>Enable</code> (<a href="http://knockoutjs.com/documentation/enable-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Enable(m => m.MyEnable)
+<span class="nocode">Html: &nbsp;</span>data-bind="enable: MyEnable"
+</pre>
+    </li>
+    <li><code>Checked</code> (<a href="http://knockoutjs.com/documentation/checked-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Checked(m => m.MyChecked)
+<span class="nocode">Html: &nbsp;</span>data-bind="checked: MyChecked"
+</pre>
+    </li>
+    <li><code>Options</code> (<a href="http://knockoutjs.com/documentation/options-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Options(m => m.MyOptions)
+<span class="nocode">Html: &nbsp;</span>data-bind="options: MyOptions"
+</pre>
+    </li>
+    <li><code>SelectedOptions</code> (<a href="http://knockoutjs.com/documentation/selectedOptions-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.SelectedOptions(m => m.MySelectedOptions)
+<span class="nocode">Html: &nbsp;</span>data-bind="selectedOptions: MySelectedOptions"
+</pre>
+    </li>
+    <li><code>OptionsCaption</code> (<a href="http://knockoutjs.com/documentation/options-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.OptionsCaption(m => m.MyOptionsCaption)
+<span class="nocode">Html: &nbsp;</span>data-bind="optionsCaption: MyOptionsCaption"
+</pre>
+    </li>
+    <li><code>OptionsText</code> (<a href="http://knockoutjs.com/documentation/options-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Disable(m => m.MyDisable)
+<span class="nocode">Html: &nbsp;</span>data-bind="disable: MyDisable"
+</pre>
+    </li>
+    <li><code>UniqueName</code> (<a href="http://knockoutjs.com/documentation/uniqueName-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.UniqueName()
+<span class="nocode">Html: &nbsp;</span>data-bind="uniqueName: true"
+</pre>
+    </li>
+    <li><code>ValueUpdate</code> (<a href="http://knockoutjs.com/documentation/value-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.ValueUpdate(KnockoutValueUpdateKind.AfterKeyDown)
+<span class="nocode">Html: &nbsp;</span>data-bind="valueUpdate: afterkeydown"
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.ValueUpdate(KnockoutValueUpdateKind.Change)
+<span class="nocode">Html: &nbsp;</span>data-bind="valueUpdate: change"
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.ValueUpdate(KnockoutValueUpdateKind.KeyUp)
+<span class="nocode">Html: &nbsp;</span>data-bind="valueUpdate: keyup"
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.ValueUpdate(KnockoutValueUpdateKind.KeyPress)
+<span class="nocode">Html: &nbsp;</span>data-bind="valueUpdate: keypress"
+</pre>
+    </li>
+    <li><code>Css</code> (<a href="http://knockoutjs.com/documentation/css-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Css("class1", m => m.MyCondition1).Css("class2", m => m.MyCondition2)
+<span class="nocode">Html: &nbsp;</span>data-bind="css: {class1: MyCondition1, class2: MyCondition2}"
+</pre>
+    </li>
+    <li><code>Style</code> (<a href="http://knockoutjs.com/documentation/style-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Style("color", m => m.MyColor).Style("fontSize", m => m.MyFontSize)
+<span class="nocode">Html: &nbsp;</span>data-bind="style: {color: MyColor, fontSize: MyFontSize}"
+</pre>
+    </li>
+    <li><code>Attr</code> (<a href="http://knockoutjs.com/documentation/attr-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Attr("href", m => m.MyHref).Attr("title", m => m.MyTitle)
+<span class="nocode">Html: &nbsp;</span>data-bind="attr: {href: MyHref, title: MyTitle}"
+</pre>
+    </li>
+    <li><code>Click</code> (<a href="http://knockoutjs.com/documentation/click-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Click("ActionName", "ControllerName", new { parameter = "Key" })
+<span class="nocode">Html: &nbsp;</span>data-bind="click : function() {executeOnServer(viewModel, '/ControllerName/ActionName?parameter=Key');}"
+</pre>
+    </li>
+    <li><code>Submit</code> (<a href="http://knockoutjs.com/documentation/submit-binding.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Submit("ActionName", "ControllerName", new { parameter = "Key" })
+<span class="nocode">Html: &nbsp;</span>data-bind="submit : function() {executeOnServer(viewModel, '/ControllerName/ActionName?parameter=Key');}"
+</pre>
+    </li>
+    <li><code>Custom</code> (<a href="http://knockoutjs.com/documentation/custom-bindings.html">Knockout</a>)
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Custom("customName", m => m.MyCustom)
+<span class="nocode">Html: &nbsp;</span>data-bind="customName: MyCustom"
+</pre>
+    </li>
+  </ul>
+</article>
+<article id="forms">
+  <h3>Form objects</h3>
+  <p>Various objects can be created using <code>ko.Html</code>. Sample:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.TextBox(m => m.StringValue)
+<span class="nocode">Html: &nbsp;</span>&lt;input data-bind="value: StringValue" /&gt;
+</pre>
+  <p>Every method has optional parameter defining a set of html attributes:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.RadioButton(m => m.RadioSelectedOptionValue, new { value = "Alpha" })
+<span class="nocode">Html: &nbsp;</span>&lt;input data-bind="checked : RadioSelectedOptionValue" type="radio" value="Alpha" /&gt;
+</pre>
+  <p>Additional data bindings can be applied to the created objects:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.TextBox(m => m.StringValue).ValueUpdate(KnockoutValueUpdateKind.AfterKeyDown)
+<span class="nocode">Html: &nbsp;</span>&lt;input data-bind="value : StringValue,valueUpdate : 'afterkeydown'" /&gt;
+</pre>
+  <p>You can create the following html objects:</p>
+  <ul>
+    <li><code>TextBox</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.TextBox(m => m.StringValue)
+<span class="nocode">Html: &nbsp;</span>&lt;input data-bind="value: StringValue" /&gt;
+</pre>
+    </li>
+    <li><code>Password</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Password(m => m.PasswordValue)
+<span class="nocode">Html: &nbsp;</span>&lt;input data-bind="value: StringValue" type="password"/&gt;
+</pre>
+    </li>
+    <li><code>Hidden</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Hidden()
+<span class="nocode">Html: &nbsp;</span>&lt;input type="hidden"/&gt;
+</pre>
+    </li>
+    <li><code>RadioButton</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.RadioButton(m => m.RadioSelectedOptionValue) 
+<span class="nocode">Html: &nbsp;</span>&lt;input data-bind="value: StringValue" type="radio"/&gt;
+</pre>
+    </li>
+    <li><code>CheckBox</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.CheckBox(m => m.BooleanValue)
+<span class="nocode">Html: &nbsp;</span>&lt;input data-bind="value: StringValue" type="checkbox"/&gt;
+</pre>
+    </li>
+    <li><code>TextArea</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.TextArea(m => m.StringValue)
+<span class="nocode">Html: &nbsp;</span>&lt;textarea data-bind="value : StringValue"&gt;&lt;/textarea&gt;
+</pre>
+    </li>
+    <li><code>DropDownList</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.DropDownList(m => m.OptionValue)
+<span class="nocode">Html: &nbsp;</span>&lt;select data-bind="options : OptionValue"&gt;&lt;/select&gt;
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.DropDownList(m => m.OptionValue, null, item => item.Key)
+<span class="nocode">Html: &nbsp;</span>&lt;select data-bind="options : OptionValue, optionsText : function(item) { return item.Key; }"&gt;&lt;/select&gt;
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.DropDownList(m => m.OptionValue, null, (m, item) => m.Prefix + item.Key)
+<span class="nocode">Html: &nbsp;</span>&lt;select data-bind="options : OptionValue, optionsText : function(item) { return Prefix + item.Key; }"&gt;&lt;/select&gt;
+</pre>
+    </li>
+    <li><code>ListBox</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.ListBox(m => m.OptionValue)
+<span class="nocode">Html: &nbsp;</span>&lt;select data-bind="options : OptionValue" multiple="multiple"&gt;&lt;/select&gt;
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.ListBox(m => m.OptionValue, null, item => item.Key)
+<span class="nocode">Html: &nbsp;</span>&lt;select data-bind="options : OptionValue, optionsText : function(item) { return item.Key; }" multiple="multiple"&gt;&lt;/select&gt;
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.ListBox(m => m.OptionValue, null, (m, item) => m.Prefix + item.Key)
+<span class="nocode">Html: &nbsp;</span>&lt;select data-bind="options : OptionValue, optionsText : function(item) { return Prefix + item.Key; }" multiple="multiple"&gt;&lt;/select&gt;
+</pre>
+    </li>
+    <li><code>Span</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Span(m => m.StringValue)
+<span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text: StringValue"&gt;&lt;/span&gt;
+</pre>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Span("text")
+<span class="nocode">Html: &nbsp;</span>&lt;span&gt;text&lt;/span&gt;
+</pre>
+    </li>
+    <li><code>SpanInline</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.SpanInline("new Date().getSeconds()")
+<span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text : new Date().getSeconds()"&gt;&lt;/span&gt;
+</pre>
+    </li>
+    <li><code>Button</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Button("Caption", "ActionName", "ControllerName", new { parameter = "Key"})
+<span class="nocode">Html: &nbsp;</span>&lt;button data-bind="click : function() {executeOnServer(viewModel, '/ControllerName/ActionName?parameter=Key');}"&gt;Caption&lt;/button&gt;
+</pre>
+    </li>
+    <li><code>HyperlinkButton</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.HyperlinkButton("Caption", "ActionName", "ControllerName", new { parameter = "Key"})
+<span class="nocode">Html: &nbsp;</span>&lt;a href="#" data-bind="click : function() {executeOnServer(viewModel, '/ControllerName/ActionName?parameter=Key');}"&gt;Caption&lt;/a&gt;
+</pre>
+    </li>
+    <li><code>Form</code>
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (ko.Html.Form("ActionName", "ControllerName", new { parameter = "Key"}))
+       {
+         Text
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;form data-bind="submit : function() {executeOnServer(viewModel, '/ControllerName/ActionName?parameter=Key');}"&gt;
+         Text
+       &lt;/form&gt;
+</pre>
+    </li>
+  </ul>
+</article>
+<article id="advanced">
+  <h3>Nested contexts</h3>
+  <p>Nested contexts allows developers to wrap a part of view in a special construction
+    offering some additional behavior.</p>
+  <p>It is possible to create the following types of nested contexts:</p>
+  <ul>
+    <li><code>Foreach</code> (<a href="http://knockoutjs.com/documentation/foreach-binding.html">Knockout</a>)
+      &mdash; walks through all collection elements providing easy access to the elements:
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (var items = ko.Foreach(m => m.Items))
+       {
+         &lt;tr&gt;
+           &lt;td &#64;items.Bind.Text(items.GetIndex())&gt;
+           &lt;/td&gt;
+           &lt;td &#64;items.Bind.Text(m =&gt; m)&gt;
+           &lt;/td&gt;
+         &lt;/tr&gt;
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;!-- ko foreach: Items --&gt;
+         &lt;tr&gt;
+           &lt;td data-bind="text : $index()"&gt;
+           &lt;/td&gt;
+           &lt;td data-bind="text : $data"&gt;
+           &lt;/td&gt;
+         &lt;/tr&gt;
+       &lt;!-- /ko --&gt;
+</pre>
+    </li>
+    <li><code>With</code> (<a href="http://knockoutjs.com/documentation/with-binding.html">Knockout</a>)
+      &mdash; easily addresses to some sub-entity of the main model
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (var subModel = ko.With(m => m.SubModel))
+       {
+         using (var subSubModel = subModel.With(m => m.SubSubModel))
+         {
+           &#64;subSubModel.Html.Span(m => ko.Model.ModelName + " " + subModel.Model.SubModelName + " " + m.SubSubModelName)
+         }
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;!-- ko with: SubModel --&gt;
+         &lt;!-- ko with: SubSubModel --&gt;
+           &lt;span data-bind="text : $parents[1].ModelName()+&#39; &#39;+$parent.SubModelName()+&#39; &#39;+SubSubModelName()"&gt;&lt;/span&gt;
+         &lt;!-- /ko --&gt;
+       &lt;!-- /ko --&gt;
+</pre>
+    </li>
+    <li><code>If</code> (<a href="http://knockoutjs.com/documentation/if-binding.html">Knockout</a>)
+      &mdash; the way some element is displayed is defined by truth of the condition:
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (ko.If(model => model.Condition1 || model.Condition2))
+       {
+         &lt;p&gt;Text&lt;/p&gt;
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;!-- ko if: Condition1()||Condition2() --&gt;
+         &lt;p&gt;Text&lt;/p&gt;
+       &lt;!-- /ko --&gt;
+</pre>
+    </li>
+  </ul>
+</article>
+<article>
+  <h3>Sending requests to server</h3>
+  <p>It is assumed that main logic of model processing is hosted on the server. Every
+    action we perform on the model should correspond to method in the controller:</p>
+  <pre class="prettyprint lang-cs">
+public class FooController : KnockoutController {
+  public ActionResult FooAction(FooModel model)
+  {
+    model.FooAction();
+    return Json(model);
+  }
+}
+</pre>
+  <p>As you see from the sample, method can take <code>model</code> parameter to which
+    the main model sent from the client side will map. In other words, <code>model</code>
+    parameter contains status of the client model as of the moment the request is sent.
+    It is possible to perform necessary manipulations over the model and then send the
+    updated model in JSON format with the help of <code>return Json(model);</code>.
+    Pay attention to the fact that base class for the controller is <code>KnockoutController</code>.
+    This base class contains extended logic for work with JSON format.</p>
+  <p>You can create a special control to send requests to server:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Button("Display", "FooAction", "Foo")
+<span class="nocode">Html: &nbsp;</span>&lt;button data-bind="click : function() {executeOnServer(viewModel, '/FooController/FooAction');}"&gt;Display&lt;/button&gt;
+</pre>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.HyperlinkButton("Display", "FooAction", "Foo")
+<span class="nocode">Html: &nbsp;</span>&lt;a href="#" data-bind="click : function() {executeOnServer(viewModel, '/FooController/FooAction');}"&gt;Display&lt;/a&gt;
+</pre>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (ko.Html.Form("FooAction", "Foo"))
+       {
+         Display
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;form data-bind="submit : function() {executeOnServer(viewModel, '/FooController/FooAction');}"&gt;
+         Display
+       &lt;/form&gt;
+</pre>
+  <p>It is possible to insert request code directly into the page:</p>
+  <pre class="prettyprint lang-cs">
+&lt;script type="text/javascript"&gt;
+  function foo() {
+    &#64;ko.ServerAction("FooAction", "Foo");
+  }      
+&lt;/script&gt;
+</pre>
+  <p>All these constructions can be extended with parameters:</p>
+  <pre class="prettyprint lang-cs">
+public class FooController : KnockoutController {
+  public ActionResult FooParametersAction(FooModel model, int value, string name)
+  {
+    model.FooParametersAction(value, name);
+    return Json(model);
+  }
+}
+</pre>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Button("Display", "FooParametersAction", "Foo", new { value = 0, name = "Sanderson"})
+<span class="nocode">Html: &nbsp;</span>&lt;button data-bind="click : function() {executeOnServer(viewModel, '/FooController/FooParametersAction?value=0&amp;name=Sanderson');}"&gt;Display&lt;/button&gt;
+</pre>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.HyperlinkButton("Display", "FooParametersAction", "Foo", new { value = 0, name = "Sanderson"})
+<span class="nocode">Html: &nbsp;</span>&lt;a href="#" data-bind="click : function() {executeOnServer(viewModel, '/FooController/FooParametersAction?value=0&amp;name=Sanderson');}"&gt;Display&lt;/a&gt;
+</pre>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (ko.Html.Form("FooParametersAction", "Foo", new { value = 0, name = "Sanderson"}))
+       {
+         Display
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;form data-bind="submit : function() {executeOnServer(viewModel, '/FooController/FooParametersAction?value=0&amp;name=Sanderson');}"&gt;
+         Display
+       &lt;/form&gt;
+</pre>
+  <pre class="prettyprint lang-cs">
+&lt;script type="text/javascript"&gt;
+  function foo() {
+    &#64;ko.ServerAction("FooParametersAction", "Foo", new { value = 0, name = "Sanderson"});
+  }      
+&lt;/script&gt;
+</pre>
+  <p>Please review the following sample to get more information on this ability:
+    @Html.ActionLink("Parameters to server", "Index", "ParametersToServer").</p>
+</article>
+<article>
+  <h3>Adding user-defined scripts</h3>
+  <p>If necessary, you can add your own knockout code to the one generated automatically.
+    It is necessary to initialize generated model by the following code:</p>
+  <pre class="prettyprint lang-cs">&#64;ko.Initialize(Model)</pre>
+  <p>This line will create a model named <code>viewModel</code> and fill it with data
+    taken from the <code>Model</code>parameter that is defined by the standard C# code.
+    Then you can add custom JavaScriptcode and extend a model:</p>
+  <pre class="prettyprint lang-html">
+&lt;script type="text/javascript"&gt;
+  viewModel.someProperty = someValue;  
+&lt;/script&gt;</pre>
+  <p>After necessary custom script is added it is necessary to activate Knockout and
+    display model in the view using the following code:</p>
+  <pre class="prettyprint lang-cs">&#64;ko.Apply(Model)</pre>
+  <p>For more detailed information of this feature please review this sample
+    @Html.ActionLink("User script", "Index", "UserScript").</p>
+</article>
+<article>
+  <h3>Forming model and using computed properties</h3>
+  <p>Besides binding interface elements to definite model properties, you can bind
+    to expressions. Samples:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&lt;button type="submit" &#64;ko.Bind.Enable(m => m.StringValue.Length &gt; 0)&gt;Add&lt;/button&gt;
+<span class="nocode">Html: &nbsp;</span>&lt;button type="submit" data-bind="enable : StringValue().length&gt;0"&gt;Add&lt;/button&gt;
+</pre>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Bind.Enable(m => m.Items.Count > 0)
+<span class="nocode">Html: &nbsp;</span>data-bind="enable : Items().length&gt;0"
+</pre>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (ko.If(model => model.Condition1 &amp;&amp; model.Condition2))
+<span class="nocode">Html: &nbsp;</span>&lt;!-- ko if: Condition1()&amp;&amp;Condition2() --&gt;
+</pre>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Span(m => m.Price).Style("color", m => m.Price &gt; 0 ? "black" : "red")
+<span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text : Price,style : {color : Price()>0 ? &#39;black&#39; : &#39;red&#39;}"&gt;&lt;/span&gt;
+</pre>
+  <p>In addition, computed properties can be created directly as model part (review
+    @Html.ActionLink("Hello world", "Index", "HelloWorld") and @Html.ActionLink("Inner computed properties", "Index", "InnerComputed"))
+    samples:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>public Expression&lt;Func&lt;string&gt;&gt; FullName() { return () => FirstName + " " + LastName; }
+<span class="nocode">Html: &nbsp;</span>viewModel.FullName = ko.computed(function() { try { return this.FirstName()+' '+this.LastName()} catch(e) { return null; }  ;}, viewModel);
+</pre>
+  <p>As you see from the sample, standard <code>viewModel</code> model will be extended
+    with a special <a href="http://knockoutjs.com/documentation/computedObservables.html">
+      computed</a>-property. Advantage of such approach is that the declared method
+    can be used not only on server side, but also as data binding on client side:</p>
+  <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;ko.Html.Span(m => m.FullName())
+<span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text : FullName"&gt;&lt;/span&gt;
+</pre>
+  <p>@Html.ActionLink("Inner computed properties", "Index", "InnerComputed")
+    sample shows that nested properties can be described not only for main model, but
+    also for sub-models (if you use pure Knockout.js you need to write some sophisticated
+    code, but when you use Knockout MVC no such problem arises).</p>
+</article>
+<article>
+  <h3>Special addressing forms: $parent, $data, $index и т.д.</h3>
+  <p>When you use Knockout.js you have to use some <a href="http://knockoutjs.com/documentation/binding-context.html">
+    specific keywords</a>. Let’s review their Knockout MVC analogue:</p>
+  <ul>
+    <li><code>$parent</code>, <code>$parents</code>, <code>$root</code>, <code>$parentContext</code>
+      &mdash; these properties allowed access to different data binding contexts. Using
+      Knockout MVC you don’t need to think about scopes hierarchy and peculiarities of
+      addressing between them &mdash; now every context has a name! Sample: @Html.ActionLink("Combine context", "Index", "CombineContext"):
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (var items = ko.Foreach(m => m.Items))
+       {
+         using (var subItems = items.Foreach(m => m.SubItems))
+         {
+           &#64;subItems.Html.Span(m => ko.Model.Key + " " + items.Model.Caption + " " + m.Name)&lt;br /&gt;
+         }
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;!-- ko foreach: Items --&gt;
+         &lt;!-- ko foreach: SubItems --&gt;
+           &lt;span data-bind="text : $parents[1].Key()+' '+$parent.Caption()+' '+Name()"&gt;&lt;/span&gt;&lt;br /&gt;
+         &lt;!-- /ko --&gt;
+       &lt;!-- /ko --&gt;
+</pre>
+    </li>
+    <li><code>$index</code> - – makes it possible to get index of the collection element
+      in the contexts <code>Foreach</code> of type. To get the corresponding property
+      each context has method <code>GetIndex()</code>. Sample:
+      @Html.ActionLink("Region (if, foreach, with)", "Index", "Region"):
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (var items = ko.Foreach(m => m.Items))
+       {    
+         &lt;span &#64;items.Bind.Text(items.GetIndex())&gt;&lt;/span&gt;      
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;!-- ko foreach: Items --&gt;
+         &lt;span data-bind="text : $index()"&gt;&lt;/span&gt;
+       &lt;!-- /ko --&gt;
+</pre>
+    </li>
+    <li><code>$data</code> - makes it possible to get collection element in the contexts
+      <code>Foreach</code>Foreach of type. To get the corresponding property it is necessary
+      to set in the data binding lambda expression that will get a model itself for the
+      model. Sample: @Html.ActionLink("Region (if, foreach, with)", "Index", "Region"):
+      <pre class="prettyprint lang-cs">
+<span class="nocode">Razor: </span>&#64;using (var items = ko.Foreach(m => m.Items))
+       {    
+         &lt;span &#64;items.Bind.Text(m =&gt; m)&gt;&lt;/span&gt;      
+       }
+<span class="nocode">Html: &nbsp;</span>&lt;!-- ko foreach: Items --&gt;
+         &lt;span data-bind="text : $data()"&gt;&lt;/span&gt;
+       &lt;!-- /ko --&gt;
+</pre>
+    </li>
+  </ul>
+</article>
+<style scoped="scoped">
+  .lang-cs
+  {
+  }
+  .lang-html
+  {
+  }
+  .nocode
+  {
+  }
+</style>
