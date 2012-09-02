@@ -256,9 +256,6 @@
     <Content Include="Views\Home\Downloads.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Downloads\Binaries.zip" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\Roadmap.cshtml" />
   </ItemGroup>
   <PropertyGroup>
