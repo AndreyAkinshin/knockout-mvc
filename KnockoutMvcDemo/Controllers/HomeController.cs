@@ -51,13 +51,5 @@ namespace KnockoutMvcDemo.Controllers
     {
       return View();
     }
-
-    //
-    // GET: /Roadmap/
-
-    public ActionResult Roadmap()
-    {
-      return View();
-    }
   }
 }
