@@ -172,7 +172,26 @@ namespace PerpetuumSoft.Knockout
         throw new NotSupportedException();
       string left = Visit(b.Left);
       string right = Visit(b.Right);
-      return left + sign + right;
+      if (b.Type == typeof (int) || 
+          b.Type == typeof (long) ||
+          b.Type == typeof (short) ||
+          b.Type == typeof (byte) ||
+          b.Type == typeof (uint) ||
+          b.Type == typeof (ushort) ||
+          b.Type == typeof (ulong) ||
+          b.Type == typeof (sbyte))
+      {
+         return string.Format("(parseInt({0}) {1} parseInt({2}))", left, sign, right);
+      }
+      
+      if (b.Type == typeof (float) ||
+          b.Type == typeof (double) ||
+          b.Type == typeof (decimal))
+      {
+            return string.Format("(parseFloat({0}) {1} parseFloat({2}))", left, sign, right);
+      }
+
+       return string.Format("({0} {1} {2})", left, sign, right);
     }
 
     private string VisitArrayIndex(BinaryExpression b)
