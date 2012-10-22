@@ -16,6 +16,11 @@ namespace KnockoutMvcDemo.Controllers
               new InnerComputedItemModel {FirstName = "Annabelle", LastName = "Arnie"},
               new InnerComputedItemModel {FirstName = "Bertie", LastName = "Brianna"},
               new InnerComputedItemModel {FirstName = "Charles", LastName = "Cayenne"},
+            },
+          SubModel = new InnerComputedSubModel
+            {
+              Caption = "Count",
+              Value = 3
             }
         };
       return View(model);

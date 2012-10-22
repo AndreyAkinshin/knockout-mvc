@@ -25,4 +25,9 @@
   }
 </table>
 
+@using (var subModel = ko.With(m => m.SubModel))
+{
+  @ko.Html.Span(m => subModel.Model.Message())
+}
+
 @ko.Apply(Model)

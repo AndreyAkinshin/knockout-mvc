@@ -32,6 +32,10 @@ namespace PerpetuumSoft.Knockout
         }
       }
 
+      foreach (var property in modelType.GetProperties())
+        if (property.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+          sb.Append(AddComputedToModel(property.PropertyType, property.GetValue(model, null), modelName + "." + property.Name));
+
       return sb.ToString();
     }
 
@@ -59,7 +63,7 @@ namespace PerpetuumSoft.Knockout
             if (first)
               first = false;
             else
-              sb.Append(',');            
+              sb.Append(',');
             sb.Append("'");
             sb.Append(property.Name);
             sb.AppendLine("': { create: function(options) {");
@@ -71,7 +75,7 @@ namespace PerpetuumSoft.Knockout
             sb.AppendLine("}}");
           }
         }
-      }      
+      }
 
       sb.Append("}");
 
@@ -82,7 +86,7 @@ namespace PerpetuumSoft.Knockout
     }
 
     private static string GetGetExpression(Type modelType, object model, MethodInfo method)
-    {      
+    {
       var expression = method.Invoke(model, null) as Expression;
       var data = KnockoutExpressionData.CreateConstructorData();
       data.Aliases[modelType.FullName] = "this";
