@@ -35,13 +35,13 @@ namespace PerpetuumSoft.Knockout.Tests
     [TestMethod]
     public void ConstructorCommonTest2()
     {
-      RunTest((Expression<Func<TestModel, string>>)(model => model.A + model.B), "this.A() + this.B()", KnockoutExpressionData.CreateConstructorData());
+      RunTest((Expression<Func<TestModel, string>>)(model => model.A + model.B), "(this.A() + this.B())", KnockoutExpressionData.CreateConstructorData());
     }
 
     [TestMethod]
     public void ConstructorCommonTest3()
     {
-      RunTest((Expression<Func<TestModel, string>>)(model => model.A + model.B + "!"), "this.A() + this.B() + '!'", KnockoutExpressionData.CreateConstructorData());
+      RunTest((Expression<Func<TestModel, string>>)(model => model.A + model.B + "!"), "((this.A() + this.B()) + '!')", KnockoutExpressionData.CreateConstructorData());
     }
 
     // Common
@@ -54,7 +54,7 @@ namespace PerpetuumSoft.Knockout.Tests
     [TestMethod]
     public void CommonTest02()
     {
-      RunTest((Expression<Func<TestModel, string>>)(model => model.A + model.B), "A() + B()");
+      RunTest((Expression<Func<TestModel, string>>)(model => model.A + model.B), "(A() + B())");
     }
 
     [TestMethod]
@@ -91,7 +91,7 @@ namespace PerpetuumSoft.Knockout.Tests
     [TestMethod]
     public void LengthTest02()
     {
-      RunTest((Expression<Func<TestModel, bool>>)(model => model.A.Length > 0), "A().length > 0");
+      RunTest((Expression<Func<TestModel, bool>>)(model => model.A.Length > 0), "(A().length > 0)");
     }
 
     [TestMethod]
@@ -125,7 +125,7 @@ namespace PerpetuumSoft.Knockout.Tests
     public void InstanceNamesTest02()
     {
       var data = new KnockoutExpressionData { InstanceNames = new[] { "X", "Y", "Z" } };
-      RunTest((Expression<Func<TestModel, TestModel, TestModel, string>>)((x, y, z) => x.A + y.B + z.C), "X.A()+Y.B()+Z.C()", data);
+      RunTest((Expression<Func<TestModel, TestModel, TestModel, string>>)((x, y, z) => x.A + y.B + z.C), "((X.A()+Y.B())+Z.C())", data);
     }
 
     // Aliases 
@@ -138,7 +138,7 @@ namespace PerpetuumSoft.Knockout.Tests
       var expression = method.Invoke(model, null) as Expression;
       var data = KnockoutExpressionData.CreateConstructorData();
       data.Aliases[typeof(TestModel).FullName] = "this";
-      RunTest(expression, "'#'+this.A()+this.B()+this.C()", data);
+      RunTest(expression, "((('#'+this.A())+this.B())+this.C())", data);
     }
 
     //Contexts
@@ -152,7 +152,7 @@ namespace PerpetuumSoft.Knockout.Tests
         using (var subSubContext = subContext.Foreach(m => m.List))
         {
           string bind = subSubContext.Bind.Text(m => context.Model.A + subContext.Model.B + m.ToString()).BindingAttributeContent();
-          AssertStringEquivalent("text:$parents[1].A()+$parent.B()+$data", bind);
+          AssertStringEquivalent("text:(($parents[1].A()+$parent.B())+$data)", bind);
         }
       }
     }
