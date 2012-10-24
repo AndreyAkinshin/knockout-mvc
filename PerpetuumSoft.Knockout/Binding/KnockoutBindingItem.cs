@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Linq.Expressions;
+using DelegateDecompiler;
 
 namespace PerpetuumSoft.Knockout
 {
@@ -22,7 +23,7 @@ namespace PerpetuumSoft.Knockout
 
     public override string GetKnockoutExpression(KnockoutExpressionData data)
     {      
-      string value = KnockoutExpressionConverter.Convert(Expression, data);
+      string value = KnockoutExpressionConverter.Convert(DecompileExpressionVisitor.Decompile(Expression), data);
       if (string.IsNullOrWhiteSpace(value))
         value = "$data";
 

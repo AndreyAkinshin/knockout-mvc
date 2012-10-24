@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using DelegateDecompiler;
 
 namespace KnockoutMvcDemo.Models
 {
@@ -8,9 +7,10 @@ namespace KnockoutMvcDemo.Models
     public string FirstName { get; set; }
     public string LastName { get; set; }
 
-    public Expression<Func<string>> FullName()
+    [Computed]
+    public string FullName
     {
-      return () => FirstName + " " + LastName;
+      get { return FirstName + " " + LastName; }
     }
   }
 }
