@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using DelegateDecompiler;
 
 namespace PerpetuumSoft.Knockout
 {
@@ -17,20 +19,18 @@ namespace PerpetuumSoft.Knockout
     {
       var sb = new StringBuilder();
 
-      foreach (var method in modelType.GetMethods())
-      {
-        if (typeof(Expression).IsAssignableFrom(method.ReturnType))
+      foreach (var property in modelType.GetProperties())
+        if (property.GetCustomAttributes(typeof(ComputedAttribute), false).Any())
         {
           sb.Append(modelName);
           sb.Append('.');
-          sb.Append(method.Name);
+          sb.Append(property.Name);
           sb.Append(" = ");
           sb.Append("ko.computed(function() { try { return ");
-          sb.Append(GetGetExpression(modelType, model, method));
+          sb.Append(ExpressionToString(modelType, DecompileExpressionVisitor.Decompile(Expression.Property(Expression.Constant(model), property))));
           sb.Append(string.Format("}} catch(e) {{ return null; }}  ;}}, {0});", modelName));
           sb.AppendLine();
         }
-      }
 
       foreach (var property in modelType.GetProperties())
         if (property.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
@@ -85,9 +85,8 @@ namespace PerpetuumSoft.Knockout
       return sb.ToString();
     }
 
-    private static string GetGetExpression(Type modelType, object model, MethodInfo method)
+    private static string ExpressionToString(Type modelType, Expression expression)
     {
-      var expression = method.Invoke(model, null) as Expression;
       var data = KnockoutExpressionData.CreateConstructorData();
       data.Aliases[modelType.FullName] = "this";
       return KnockoutExpressionConverter.Convert(expression, data);

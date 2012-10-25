@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using DelegateDecompiler;
 
 namespace KnockoutMvcDemo.Models
 {
@@ -7,9 +6,10 @@ namespace KnockoutMvcDemo.Models
   {
     public int NumberOfClicks { get; set; }
 
-    public Expression<Func<bool>> HasClickedTooManyTimes()
+    [Computed]
+    public bool HasClickedTooManyTimes
     {
-      return () => NumberOfClicks >= 3;
+      get { return NumberOfClicks >= 3; }
     }
 
     public void RegisterClick()
