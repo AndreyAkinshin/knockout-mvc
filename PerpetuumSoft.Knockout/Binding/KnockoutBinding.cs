@@ -49,73 +49,42 @@ namespace PerpetuumSoft.Knockout
     }
 
     // *** Working with form fields ***
-    // Value
     public KnockoutBinding<TModel> Value(Expression<Func<TModel, object>> binding)
     {
       Items.Add(new KnockoutBindingItem<TModel, object> { Name = "value", Expression = binding });
       return this;
     }
 
-    // Disable
     public KnockoutBinding<TModel> Disable(Expression<Func<TModel, bool>> binding)
     {
       Items.Add(new KnockoutBindingItem<TModel, bool> { Name = "disable", Expression = binding });
       return this;
     }
 
-    public KnockoutBinding<TModel> Disable(Expression<Func<TModel, Expression<Func<bool>>>> binding)
-    {
-      Items.Add(new KnockoutBindingItem<TModel, Expression<Func<bool>>> { Name = "disable", Expression = binding });
-      return this;
-    }
-
-    // Enable
     public KnockoutBinding<TModel> Enable(Expression<Func<TModel, bool>> binding)
     {
       Items.Add(new KnockoutBindingItem<TModel, bool> { Name = "enable", Expression = binding });
       return this;
     }
 
-    public KnockoutBinding<TModel> Enable(Expression<Func<TModel, Expression<Func<bool>>>> binding)
-    {
-      Items.Add(new KnockoutBindingItem<TModel, Expression<Func<bool>>> { Name = "enable", Expression = binding });
-      return this;
-    }
-
-    // Checked
     public KnockoutBinding<TModel> Checked(Expression<Func<TModel, object>> binding)
     {
       Items.Add(new KnockoutBindingItem<TModel, object> { Name = "checked", Expression = binding });
       return this;
     }
 
-    // Options
     public KnockoutBinding<TModel> Options(Expression<Func<TModel, IEnumerable>> binding)
     {
       Items.Add(new KnockoutBindingItem<TModel, IEnumerable> { Name = "options", Expression = binding });
       return this;
     }
 
-    public KnockoutBinding<TModel> Options(Expression<Func<TModel, Expression<Func<IEnumerable>>>> binding)
-    {
-      Items.Add(new KnockoutBindingItem<TModel, Expression<Func<IEnumerable>>> { Name = "options", Expression = binding });
-      return this;
-    }
-
-    // SelectedOptions
     public KnockoutBinding<TModel> SelectedOptions(Expression<Func<TModel, IEnumerable>> binding)
     {
       Items.Add(new KnockoutBindingItem<TModel, IEnumerable> { Name = "selectedOptions", Expression = binding });
       return this;
     }
 
-    public KnockoutBinding<TModel> SelectedOptions(Expression<Func<TModel, Expression<Func<IEnumerable>>>> binding)
-    {
-      Items.Add(new KnockoutBindingItem<TModel, Expression<Func<IEnumerable>>> { Name = "selectedOptions", Expression = binding });
-      return this;
-    }
-
-    // OptionsCaption
     public KnockoutBinding<TModel> OptionsCaption(Expression<Func<TModel, object>> binding)
     {
       Items.Add(new KnockoutBindingItem<TModel, object> { Name = "optionsCaption", Expression = binding });
@@ -128,28 +97,24 @@ namespace PerpetuumSoft.Knockout
       return this;
     }
 
-    // OptionsText
-    public KnockoutBinding<TModel> OptionsText(string text) // TODO: rewrite to expressions with functions
+    public KnockoutBinding<TModel> OptionsText(string text)
     {
       Items.Add(new KnockoutBindingStringItem("optionsText", text, false));
       return this;
     }
 
-    // UniqueName
     public KnockoutBinding<TModel> UniqueName()
     {
       Items.Add(new KnockoutBindingStringItem("uniqueName", "true", false));
       return this;
     }
 
-    // ValueUpdate
     public KnockoutBinding<TModel> ValueUpdate(KnockoutValueUpdateKind kind)
     {
       Items.Add(new KnockoutBindingStringItem("valueUpdate", Enum.GetName(typeof(KnockoutValueUpdateKind), kind).ToLower()));
       return this;
     }
 
-    // HasFucus
     public KnockoutBinding<TModel> HasFocus(Expression<Func<TModel, object>> binding)
     {
       Items.Add(new KnockoutBindingItem<TModel, object> {Name = "hasfocus", Expression = binding});
