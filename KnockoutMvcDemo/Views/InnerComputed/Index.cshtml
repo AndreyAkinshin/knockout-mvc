@@ -19,7 +19,7 @@
         @items.Html.Span(m => m.LastName)
       </td>
       <td>
-        @items.Html.Span(m => m.FullName())
+        @items.Html.Span(m => m.FullName)
       </td>
     </tr>
   }
@@ -27,7 +27,7 @@
 
 @using (var subModel = ko.With(m => m.SubModel))
 {
-  @ko.Html.Span(m => subModel.Model.Message())
+  @ko.Html.Span(m => subModel.Model.Message)
 }
 
 @ko.Apply(Model)

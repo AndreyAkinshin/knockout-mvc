@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using DelegateDecompiler;
 
 namespace KnockoutMvcDemo.Models
 {
@@ -9,9 +8,10 @@ namespace KnockoutMvcDemo.Models
     public string FirstName { get; set; }
     public string LastName { get; set; }
 
-    public Expression<Func<string>> FullName()
+    [Computed]
+    public string FullName
     {
-      return () => FirstName + " " + LastName;
+      get { return FirstName + " " + LastName; }
     }
   }
 
@@ -20,9 +20,10 @@ namespace KnockoutMvcDemo.Models
     public string Caption { get; set; }
     public int Value { get; set; }
 
-    public Expression<Func<string>> Message()
+    [Computed]
+    public string Message
     {
-      return () => Caption + " = " + Value;
+      get { return Caption + " = " + Value; }
     }
   }
 
