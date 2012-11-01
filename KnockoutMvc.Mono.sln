@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerpetuumSoft.Knockout.Mono", "PerpetuumSoft.Knockout\PerpetuumSoft.Knockout.Mono.csproj", "{25C6EE67-C272-4B3C-83BD-CEC6EFAC7AE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutMvcDemo.Mono", "KnockoutMvcDemo\KnockoutMvcDemo.Mono.csproj", "{8C24ECDE-045D-4487-8BFB-ACA46E6A0A7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerpetuumSoft.Knockout.Tests.Mono", "PerpetuumSoft.Knockout.Tests.Mono\PerpetuumSoft.Knockout.Tests.Mono.csproj", "{1C09F8E4-761D-4E3C-87C6-12C7E59F1582}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C09F8E4-761D-4E3C-87C6-12C7E59F1582}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1C09F8E4-761D-4E3C-87C6-12C7E59F1582}.Debug|x86.Build.0 = Debug|Any CPU
+		{1C09F8E4-761D-4E3C-87C6-12C7E59F1582}.Release|x86.ActiveCfg = Release|Any CPU
+		{1C09F8E4-761D-4E3C-87C6-12C7E59F1582}.Release|x86.Build.0 = Release|Any CPU
+		{25C6EE67-C272-4B3C-83BD-CEC6EFAC7AE9}.Debug|x86.ActiveCfg = Debug|x86
+		{25C6EE67-C272-4B3C-83BD-CEC6EFAC7AE9}.Debug|x86.Build.0 = Debug|x86
+		{25C6EE67-C272-4B3C-83BD-CEC6EFAC7AE9}.Release|x86.ActiveCfg = Release|x86
+		{25C6EE67-C272-4B3C-83BD-CEC6EFAC7AE9}.Release|x86.Build.0 = Release|x86
+		{8C24ECDE-045D-4487-8BFB-ACA46E6A0A7E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8C24ECDE-045D-4487-8BFB-ACA46E6A0A7E}.Debug|x86.Build.0 = Debug|Any CPU
+		{8C24ECDE-045D-4487-8BFB-ACA46E6A0A7E}.Release|x86.ActiveCfg = Release|Any CPU
+		{8C24ECDE-045D-4487-8BFB-ACA46E6A0A7E}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = PerpetuumSoft.Knockout\PerpetuumSoft.Knockout.Mono.csproj
+	EndGlobalSection
+EndGlobal
