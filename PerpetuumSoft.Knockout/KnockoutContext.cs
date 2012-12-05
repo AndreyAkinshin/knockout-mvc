@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using System.Web;
 using System.Web.Routing;
 using System.Linq.Expressions;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace PerpetuumSoft.Knockout
 {
@@ -51,8 +51,7 @@ namespace PerpetuumSoft.Knockout
 
       var sb = new StringBuilder();
 
-      var serializer = new JavaScriptSerializer();
-      var json = serializer.Serialize(model);
+      var json = JsonConvert.SerializeObject(model);
 
       sb.AppendLine(@"<script type=""text/javascript""> ");
       sb.AppendLine(string.Format("var {0}Js = {1};", ViewModelName, json));
