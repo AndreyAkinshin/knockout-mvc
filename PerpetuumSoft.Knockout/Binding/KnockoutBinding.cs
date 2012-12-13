@@ -103,6 +103,13 @@ namespace PerpetuumSoft.Knockout
       return this;
     }
 
+    public KnockoutBinding<TModel> OptionsValue(string text)
+    {
+        Items.Add(new KnockoutBindingStringItem("optionsValue", text, false));
+        return this;
+    }
+
+
     public KnockoutBinding<TModel> UniqueName()
     {
       Items.Add(new KnockoutBindingStringItem("uniqueName", "true", false));
