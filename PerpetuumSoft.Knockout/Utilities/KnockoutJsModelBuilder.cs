@@ -33,8 +33,21 @@ namespace PerpetuumSoft.Knockout
         }
 
       foreach (var property in modelType.GetProperties())
-        if (property.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
-          sb.Append(AddComputedToModel(property.PropertyType, property.GetValue(model, null), modelName + "." + property.Name));
+      {
+          if (property.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+          {
+              object value; 
+              try
+              {
+                  value = property.GetValue(model, null);
+                  sb.Append(AddComputedToModel(property.PropertyType, value, modelName + "." + property.Name));
+              }
+              catch
+              {
+                  
+              }
+          }
+      }
 
       return sb.ToString();
     }
