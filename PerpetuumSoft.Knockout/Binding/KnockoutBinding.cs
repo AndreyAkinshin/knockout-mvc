@@ -97,15 +97,15 @@ namespace PerpetuumSoft.Knockout
       return this;
     }
 
-    public KnockoutBinding<TModel> OptionsText(string text)
+    public KnockoutBinding<TModel> OptionsText(string text, bool isWord = false)
     {
-      Items.Add(new KnockoutBindingStringItem("optionsText", text, false));
+      Items.Add(new KnockoutBindingStringItem("optionsText", text, isWord));
       return this;
     }
 
-    public KnockoutBinding<TModel> OptionsValue(string text)
+    public KnockoutBinding<TModel> OptionsValue(string text, bool isWord = false)
     {
-        Items.Add(new KnockoutBindingStringItem("optionsValue", text, false));
+        Items.Add(new KnockoutBindingStringItem("optionsValue", text, isWord));
         return this;
     }
 

@@ -88,11 +88,11 @@ namespace PerpetuumSoft.Knockout
             tagBuilder.Options(Expression.Lambda<Func<TModel, IEnumerable>>(options.Body, options.Parameters));
         if (!string.IsNullOrEmpty(OptionsTextValue))
         {
-            tagBuilder.OptionsText(OptionsTextValue);
+            tagBuilder.OptionsText(OptionsTextValue,true);
         }
-        if (!string.IsNullOrEmpty(OptionsTextValue))
+        if (!string.IsNullOrEmpty(OptionsIdValue))
         {
-            tagBuilder.OptionsValue(OptionsTextValue);
+            tagBuilder.OptionsValue(OptionsIdValue,true);
         }
         return tagBuilder;
     }
