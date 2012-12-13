@@ -86,11 +86,11 @@ namespace PerpetuumSoft.Knockout
         tagBuilder.ApplyAttributes(htmlAttributes);
         if (options != null)
             tagBuilder.Options(Expression.Lambda<Func<TModel, IEnumerable>>(options.Body, options.Parameters));
-        if (string.IsNullOrEmpty(OptionsTextValue))
+        if (!string.IsNullOrEmpty(OptionsTextValue))
         {
             tagBuilder.OptionsText(OptionsTextValue);
         }
-        if (string.IsNullOrEmpty(OptionsTextValue))
+        if (!string.IsNullOrEmpty(OptionsTextValue))
         {
             tagBuilder.OptionsValue(OptionsTextValue);
         }
