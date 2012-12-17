@@ -80,6 +80,22 @@ namespace PerpetuumSoft.Knockout
       }
       return tagBuilder;
     }
+    public KnockoutTagBuilder<TModel> DropDownList<TItem>(Expression<Func<TModel, IList<TItem>>> options, object htmlAttributes = null,string OptionsTextValue = null,string OptionsIdValue = null)
+    {
+        var tagBuilder = new KnockoutTagBuilder<TModel>(Context, "select", InstanceNames, Aliases);
+        tagBuilder.ApplyAttributes(htmlAttributes);
+        if (options != null)
+            tagBuilder.Options(Expression.Lambda<Func<TModel, IEnumerable>>(options.Body, options.Parameters));
+        if (!string.IsNullOrEmpty(OptionsTextValue))
+        {
+            tagBuilder.OptionsText(OptionsTextValue,true);
+        }
+        if (!string.IsNullOrEmpty(OptionsIdValue))
+        {
+            tagBuilder.OptionsValue(OptionsIdValue,true);
+        }
+        return tagBuilder;
+    }
 
     public KnockoutTagBuilder<TModel> ListBox<TItem>(Expression<Func<TModel, IList<TItem>>> options, object htmlAttributes = null, Expression<Func<TItem, object>> optionsText = null)
     {
