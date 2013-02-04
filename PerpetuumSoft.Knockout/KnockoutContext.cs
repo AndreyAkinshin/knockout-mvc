@@ -238,11 +238,9 @@ namespace PerpetuumSoft.Knockout
       return new MvcHtmlString(exec);
     }
 
-    protected static UrlHelper Url()
+    protected UrlHelper Url()
     {
-      var httpContext = new HttpContextWrapper(HttpContext.Current);
-      var requestContext = new RequestContext(httpContext, new RouteData());
-      return new UrlHelper(requestContext);
+      return new UrlHelper(viewContext.RequestContext);
     }
   }
 }
