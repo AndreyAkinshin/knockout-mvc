@@ -165,7 +165,9 @@
     <Content Include="Images\Logo\logo180x100.png" />
     <Content Include="Images\Logo\logo200x200.png" />
     <Content Include="Images\Logo\logo_small100x100.png" />
+    <Content Include="Images\PerfectWidgets.jpg" />
     <Content Include="Images\Screenshots\screens-intellisense.png" />
+    <Content Include="Images\SharpShooterReportsWeb.jpg" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -192,8 +194,30 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_ExampleLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Views\HelloWorld\Index.cshtml" />
+    <Content Include="Views\ClickCounter\Index.cshtml" />
+    <Content Include="Views\SimpleList\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\BetterList\Index.cshtml" />
+    <Content Include="Views\ControlTypes\Index.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
+    <Content Include="Views\ComplexBinding\Index.cshtml" />
+    <Content Include="Views\GiftList\Index.cshtml" />
+    <Content Include="Views\ParametersToServer\Index.cshtml" />
+    <Content Include="Views\UserScript\Index.cshtml" />
+    <Content Include="Views\Collections\Index.cshtml" />
+    <Content Include="Views\ContactsEditor\Index.cshtml" />
+    <Content Include="Views\CartEditor\Index.cshtml" />
+    <Content Include="Views\CombineContext\Index.cshtml" />
+    <Content Include="Views\InnerComputed\Index.cshtml" />
+    <Content Include="Views\BigData\Index.cshtml" />
+    <Content Include="Views\Home\QuickStart.cshtml" />
+    <Content Include="Views\Home\Documentation.cshtml" />
+    <Content Include="Views\Home\Introduction.cshtml" />
+    <Content Include="Views\Home\Links.cshtml" />
+    <Content Include="Views\Home\ConceptTable2.cshtml" />
+    <Content Include="Views\Home\ConceptTable3.cshtml" />
+    <Content Include="Views\Home\Downloads.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -201,75 +225,6 @@
       <Project>{25C6EE67-C272-4B3C-83BD-CEC6EFAC7AE9}</Project>
       <Name>PerpetuumSoft.Knockout</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\HelloWorld\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ClickCounter\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\SimpleList\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\BetterList\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ControlTypes\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Region\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ComplexBinding\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\GiftList\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ParametersToServer\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserScript\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Collections\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ContactsEditor\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\CartEditor\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\CombineContext\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\InnerComputed\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\BigData\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\QuickStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Documentation.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Introduction.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Links.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\ConceptTable.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Downloads.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
