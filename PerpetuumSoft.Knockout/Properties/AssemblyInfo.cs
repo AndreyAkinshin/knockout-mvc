@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Perpetuum Software LLC")]
 [assembly: AssemblyProduct("PerpetuumSoft.Knockout")]
-[assembly: AssemblyCopyright("© 2012 Perpetuum Software LLC")]
+[assembly: AssemblyCopyright("© 2012–2013 Perpetuum Software LLC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
