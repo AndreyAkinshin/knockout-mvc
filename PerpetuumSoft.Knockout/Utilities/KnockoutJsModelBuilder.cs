@@ -18,7 +18,8 @@ namespace PerpetuumSoft.Knockout
     public static string AddComputedToModel(Type modelType, object model, string modelName)
     {
       var sb = new StringBuilder();
-
+      if (modelType.IsClass && modelType.Namespace.Equals("System.Data.Entity.DynamicProxies"))
+          modelType = modelType.BaseType;
       foreach (var property in modelType.GetProperties())
         if (property.GetCustomAttributes(typeof(ComputedAttribute), false).Any())
         {
@@ -36,6 +37,8 @@ namespace PerpetuumSoft.Knockout
       {
           if (property.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
           {
+              if (property.GetCustomAttributes(typeof(Newtonsoft.Json.JsonIgnoreAttribute), false).Length > 0)
+                continue;
               object value; 
               try
               {
