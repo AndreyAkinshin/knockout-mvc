@@ -21,6 +21,8 @@ namespace PerpetuumSoft.Knockout
       if (data == null)
         return;
       var type = data.GetType();
+	  if (type.Namespace == null)
+		  return;
       if (type.IsClass && type.Namespace.Equals("System.Data.Entity.DynamicProxies"))
           type = type.BaseType;
       foreach (var property in type.GetProperties())
