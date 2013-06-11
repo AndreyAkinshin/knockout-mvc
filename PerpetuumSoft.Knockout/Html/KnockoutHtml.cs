@@ -32,7 +32,7 @@ namespace PerpetuumSoft.Knockout
 
     public KnockoutTagBuilder<TModel> TextBox(Expression<Func<TModel, object>> text, object htmlAttributes = null)
     {
-      return Input(text, null, htmlAttributes);
+      return Input(text, "text", htmlAttributes);
     }
 
     public KnockoutTagBuilder<TModel> Password(Expression<Func<TModel, object>> text, object htmlAttributes = null)
