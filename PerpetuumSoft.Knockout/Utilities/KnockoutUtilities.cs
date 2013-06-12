@@ -35,7 +35,7 @@ namespace PerpetuumSoft.Knockout
         if (value == null)
         {
           value = GetActualValue(property.PropertyType, null);
-          if (value != null)
+          if (value != null && property.CanWrite)
             property.SetValue(data, value, null);
         }
         else if (!IsSystemType(property.PropertyType))
