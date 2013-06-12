@@ -8,7 +8,7 @@
         contentType: "application/json; charset=utf-8",
         success: function (data) {
         	if (data.redirect) {
-        		location.href = data.url;
+        		location.href = resolveUrl(data.url);
         	}
         	else {
         		ko.mapping.fromJS(data, model);
@@ -19,4 +19,11 @@
         }
     });
 
+};
+
+ resolveUrl = function (url) {
+    if (url.indexOf("~/") == 0) {
+        url = baseUrl + url.substring(2);
+    }
+    return url;
 };
