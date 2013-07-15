@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.Mvc;
 using System.Web;
-using System.Web.Routing;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
@@ -240,49 +239,36 @@ namespace PerpetuumSoft.Knockout
             }
         }
 
-    //TODO: rewrite
         public MvcHtmlString ServerAction(string actionName, string controllerName, object routeValues = null)
         {
             var url = Url().Action(actionName, controllerName, routeValues);
-      url = url.Replace("%28", "(");
-      url = url.Replace("%29", ")");
-      url = url.Replace("%24", "$");
+            url = url.Replace("%28", "(");
+            url = url.Replace("%29", ")");
+            url = url.Replace("%24", "$");
             string exec = string.Format(@"executeOnServer({0}, '{1}')", ViewModelName, url);
-            if (exec.Contains("%24index()"))
+            int startIndex = 0;
+            const string parentPrefix = "$parentContext.";
+            while (exec.Substring(startIndex).Contains("$index()"))
             {
-                int count = exec.Length / 17 + 1;
-                string[] from = new string[count], to = new string[count];
-                from[0] = "%24index()";
-                to[0] = "$index()";
-                for (int i = 1; i < count; i++)
+                string pattern = "$index()";
+                string nextPattern = parentPrefix + pattern;
+                int index = startIndex + exec.Substring(startIndex).IndexOf(pattern);
+                while (index - parentPrefix.Length >= startIndex &&
+                       exec.Substring(index - parentPrefix.Length, nextPattern.Length) == nextPattern)
                 {
-                    from[i] = "%24parentContext." + from[i - 1];
-                    to[i] = "$parentContext." + to[i - 1];
+                    index -= parentPrefix.Length;
+                    pattern = nextPattern;
+                    nextPattern = parentPrefix + pattern;
                 }
-                for (int i = count - 1; i >= 0; i--)
-                    exec = exec.Replace(from[i], "'+" + to[i] + "+'");
-            }
-            if (exec.Contains("%24index%28%29")) // For ASP.NET MVC4
-            {
-                int count = exec.Length / 17 + 1;
-                string[] from = new string[count], to = new string[count];
-                from[0] = "%24index%28%29";
-                to[0] = "$index%28%29";
-                for (int i = 1; i < count; i++)
-                {
-                    from[i] = "%24parentContext." + from[i - 1];
-                    to[i] = "$parentContext." + to[i - 1];
-          nextPattern = parentPrefix + pattern;
-                }
-                for (int i = count - 1; i >= 0; i--)
-                    exec = exec.Replace(from[i], "'+" + to[i] + "+'");
+                exec = exec.Substring(0, index) + "'+" + pattern + "+'" + exec.Substring(index + pattern.Length);
+                startIndex = index + pattern.Length;
             }
             return new MvcHtmlString(exec);
         }
 
-    protected UrlHelper Url()
+        protected UrlHelper Url()
         {
-      return new UrlHelper(viewContext.RequestContext);
+            return new UrlHelper(viewContext.RequestContext);
         }
     }
 }
