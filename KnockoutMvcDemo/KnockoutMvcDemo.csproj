@@ -98,6 +98,7 @@
     <Compile Include="Controllers\InnerComputedController.cs" />
     <Compile Include="Controllers\HelloWorldController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MultipleViewModelController.cs" />
     <Compile Include="Controllers\ParametersToServerController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\SimpleListController.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Models\GiftListModel.cs" />
     <Compile Include="Models\InnerComputedModel.cs" />
     <Compile Include="Models\HelloWorldModel.cs" />
+    <Compile Include="Models\MultipleViewModelModel.cs" />
     <Compile Include="Models\ParametersToServerModel.cs" />
     <Compile Include="Models\RegionModel.cs" />
     <Compile Include="Models\SimpleListModel.cs" />
@@ -136,6 +138,7 @@
     <Content Include="Descriptions\CombineContext.html" />
     <Content Include="Descriptions\BigData.html" />
     <Content Include="Descriptions\InnerComputed.html" />
+    <Content Include="Descriptions\MultipleViewModel.html" />
     <Content Include="Descriptions\UserScript.html" />
     <Content Include="Descriptions\ParametersToServer.html" />
     <Content Include="Descriptions\Region.html" />
@@ -219,6 +222,9 @@
     <Content Include="Views\Home\ConceptTable3.cshtml" />
     <Content Include="Views\Home\Downloads.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\MultipleViewModel\Index.cshtml" />
+    <Content Include="Views\MultipleViewModel\PartialClickCounterViewModel.cshtml" />
+    <Content Include="Views\MultipleViewModel\PartialHelloWorldViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PerpetuumSoft.Knockout\PerpetuumSoft.Knockout.csproj">
