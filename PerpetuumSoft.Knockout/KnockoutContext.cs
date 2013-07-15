@@ -240,10 +240,13 @@ namespace PerpetuumSoft.Knockout
             }
         }
 
-        //TODO: rewrite
+    //TODO: rewrite
         public MvcHtmlString ServerAction(string actionName, string controllerName, object routeValues = null)
         {
             var url = Url().Action(actionName, controllerName, routeValues);
+      url = url.Replace("%28", "(");
+      url = url.Replace("%29", ")");
+      url = url.Replace("%24", "$");
             string exec = string.Format(@"executeOnServer({0}, '{1}')", ViewModelName, url);
             if (exec.Contains("%24index()"))
             {
@@ -269,6 +272,7 @@ namespace PerpetuumSoft.Knockout
                 {
                     from[i] = "%24parentContext." + from[i - 1];
                     to[i] = "$parentContext." + to[i - 1];
+          nextPattern = parentPrefix + pattern;
                 }
                 for (int i = count - 1; i >= 0; i--)
                     exec = exec.Replace(from[i], "'+" + to[i] + "+'");
@@ -276,11 +280,9 @@ namespace PerpetuumSoft.Knockout
             return new MvcHtmlString(exec);
         }
 
-        protected static UrlHelper Url()
+    protected UrlHelper Url()
         {
-            var httpContext = new HttpContextWrapper(HttpContext.Current);
-            var requestContext = new RequestContext(httpContext, new RouteData());
-            return new UrlHelper(requestContext);
+      return new UrlHelper(viewContext.RequestContext);
         }
     }
 }

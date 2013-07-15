@@ -20,8 +20,15 @@ namespace PerpetuumSoft.Knockout
     {
       if (data == null)
         return;
-      foreach (var property in data.GetType().GetProperties())
+      var type = data.GetType();
+	  if (type.Namespace == null)
+		  return;
+      if (type.IsClass && type.Namespace.Equals("System.Data.Entity.DynamicProxies"))
+          type = type.BaseType;
+      foreach (var property in type.GetProperties())
       {
+        if (property.GetCustomAttributes(typeof(Newtonsoft.Json.JsonIgnoreAttribute), false).Length > 0)
+          continue;
         if (property.GetGetMethod() == null)
           continue;
         if (property.GetGetMethod().GetParameters().Length > 0)
@@ -30,8 +37,8 @@ namespace PerpetuumSoft.Knockout
         if (value == null)
         {
           value = GetActualValue(property.PropertyType, null);
-          if (value != null)
-            property.SetValue(data, GetActualValue(property.PropertyType, null), null);
+          if (value != null && property.CanWrite)
+            property.SetValue(data, value, null);
         }
         else if (!IsSystemType(property.PropertyType))
           ConvertData(value);

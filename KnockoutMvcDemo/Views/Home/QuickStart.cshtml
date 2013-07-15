@@ -5,17 +5,13 @@
 <div class="well">
   <h2>Quick start</h2>
   <ul>
-    <li>Add reference to <code>PerpetuumSoft.Knockout</code></li>
-    <li>Add next line to <code>Application_Start()</code> in <code>Global.asax</code>:
-      <pre class="prettyprint lang-cs">
-ModelBinders.Binders.DefaultBinder = new KnockoutModelBinder();</pre>
-    </li>
+    <li>Install <a href="https://nuget.org/packages/kMVC/">kMVC NuGet package</a></li>
     <li>Add links to next js-files:
       <pre class="prettyprint lang-xml">
-&lt;script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"&gt;&lt;/script&gt;
-&lt;script src="@Url.Content("~/Scripts/knockout-2.1.0.js")" type="text/javascript"&gt;&lt;/script&gt;
-&lt;script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"&gt;&lt;/script&gt;
-&lt;script src="@Url.Content("~/Scripts/perpetuum.knockout.js")" type="text/javascript"&gt;&lt;/script&gt;</pre>
+&lt;script src="&#64;Url.Content("~/Scripts/jquery-x.y.z.min.js")" type="text/javascript"&gt;&lt;/script&gt; &lt;!-- Use your version of jQuery --&gt;
+&lt;script src="&#64;Url.Content("~/Scripts/knockout-x.y.z.js")" type="text/javascript"&gt;&lt;/script&gt; &lt;!-- Use your version of knockout --&gt;
+&lt;script src="&#64;Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="&#64;Url.Content("~/Scripts/perpetuum.knockout.js")" type="text/javascript"&gt;&lt;/script&gt;</pre>
     </li>
     <li>Use next template for view:
       <pre class="prettyprint lang-cs">
