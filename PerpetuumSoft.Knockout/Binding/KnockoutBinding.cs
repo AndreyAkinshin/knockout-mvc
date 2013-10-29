@@ -175,6 +175,12 @@ namespace PerpetuumSoft.Knockout
       return this;
     }
 
+    public KnockoutBinding<TModel> Custom(string name, Expression<Func<TModel, object>> binding)
+    {
+        Items.Add(new KnockoutBindingItem<TModel, object> { Name = name, Expression = binding });
+        return this;
+    }
+
     // *** Common ***
 
     private readonly List<KnockoutBindingItem> items = new List<KnockoutBindingItem>();
