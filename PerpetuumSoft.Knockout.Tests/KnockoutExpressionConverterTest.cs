@@ -145,15 +145,42 @@ namespace PerpetuumSoft.Knockout.Tests
     [TestMethod]
     public void ContextTest01()
     {
-      var viewContext = new ViewContext {Writer = new StringWriter()};
+      var viewContext = new ViewContext { Writer = new StringWriter() };
       var context = new KnockoutContext<TestModel>(viewContext);
       using (var subContext = context.With(m => m.SubModel))
       {
+        string bind = subContext.Bind.Text(m => context.Model.A + m.ToString()).BindingAttributeContent();
+        AssertStringEquivalent("text:($parent.A()+$data)", bind);
+
         using (var subSubContext = subContext.Foreach(m => m.List))
         {
-          string bind = subSubContext.Bind.Text(m => context.Model.A + subContext.Model.B + m.ToString()).BindingAttributeContent();
-          AssertStringEquivalent("text:(($parents[1].A()+$parent.B())+$data)", bind);
+          string subBind = subSubContext.Bind.Text(m => context.Model.A + subContext.Model.B + m.ToString()).BindingAttributeContent();
+          AssertStringEquivalent("text:(($parents[1].A()+$parent.B())+$data)", subBind);
         }
+      }
+    }
+
+    [TestMethod]
+    public void ContextTest02()
+    {
+      var viewContext = new ViewContext { Writer = new StringWriter() };
+      var context = new KnockoutContext<TestModel>(viewContext);
+      using (var subContext = context.Foreach(m => m.IntList))
+      {
+        string bind = subContext.Bind.Text(m => m).BindingAttributeContent();
+        AssertStringEquivalent("text: $data", bind);
+      }
+    }
+
+    [TestMethod]
+    public void ContextTest03()
+    {
+      var viewContext = new ViewContext { Writer = new StringWriter() };
+      var context = new KnockoutContext<TestModel>(viewContext);
+      using (var subContext = context.Foreach(m => m.IntList))
+      {
+        string bind = subContext.Bind.Text(n => n + 1).BindingAttributeContent();
+        AssertStringEquivalent("text:(parseInt($data)+parseInt(1))", bind);
       }
     }
   }

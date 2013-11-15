@@ -17,6 +17,8 @@ namespace PerpetuumSoft.Knockout.Tests
 
     public List<string> List { get; set; }
 
+    public List<int> IntList { get; set; }
+
     public TestModel SubModel { get; set; }
 
     [ScriptIgnore]
