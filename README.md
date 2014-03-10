@@ -16,4 +16,4 @@ Generated JavaScript code is based on Knockout.js and that is why it works under
 MIT license - [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
 
 ##Copyright
-[© 2012–2013 Perpetuum Software LLC](http://www.perpetuumsoft.com/)
+[© 2012–2014 Perpetuum Software LLC](http://www.perpetuumsoft.com/)
