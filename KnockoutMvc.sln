@@ -1,25 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6ED1EFF6-91DF-4CFB-8C5B-C8E526D14D2B}"
-	ProjectSection(SolutionItems) = preProject
-		KnockoutIntegration.vsmdi = KnockoutIntegration.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerpetuumSoft.Knockout", "PerpetuumSoft.Knockout\PerpetuumSoft.Knockout.csproj", "{25C6EE67-C272-4B3C-83BD-CEC6EFAC7AE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutMvcDemo", "KnockoutMvcDemo\KnockoutMvcDemo.csproj", "{8C24ECDE-045D-4487-8BFB-ACA46E6A0A7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerpetuumSoft.Knockout.Tests", "PerpetuumSoft.Knockout.Tests\PerpetuumSoft.Knockout.Tests.csproj", "{6E436C20-331A-4705-A8F0-FA95EFEB342E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2AF73AF4-2D56-4D09-B6D1-13F320E031F2}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
