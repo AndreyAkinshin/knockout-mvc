@@ -39,12 +39,12 @@ namespace KnockoutMvcDemo.Controllers
 
     private string GetModel(string modelName)
     {
-      return GetCode(LoadFile(string.Format("\\Models\\{0}Model.cs", modelName)));
+      return GetCode(LoadFile(Path.Combine("Models", string.Format("{0}Model.cs", modelName))));
     }
 
     private string GetController(string modelName)
     {
-      return GetCode(LoadFile(string.Format("\\Controllers\\{0}Controller.cs", modelName)));
+      return GetCode(LoadFile(Path.Combine("Controllers",string.Format("{0}Controller.cs", modelName))));
     }
 
     private string GetCode(string fileName)
@@ -74,13 +74,13 @@ namespace KnockoutMvcDemo.Controllers
 
     private string GetRazor(string modelName)
     {
-      var razor = LoadFile(string.Format("\\Views\\{0}\\Index.cshtml", modelName));
+      var razor = LoadFile(Path.Combine(Path.Combine("Views",string.Format("{0}", modelName)),"Index.cshtml"));
       return razor;
     }
 
     private string GetDescription(string modelName)
     {
-      string description = LoadFile(string.Format("\\Descriptions\\{0}.html", modelName));
+      string description = LoadFile(Path.Combine("Descriptions", string.Format("{0}.html", modelName)));
       if (string.IsNullOrWhiteSpace(description))
         description = "No description";
       return description;
