@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Web.Script.Serialization;
 using DelegateDecompiler;
+using Newtonsoft.Json;
 
 namespace KnockoutMvcDemo.Models
 {
@@ -9,6 +11,8 @@ namespace KnockoutMvcDemo.Models
     public string LastName { get; set; }
 
     [Computed]
+    [ScriptIgnore]
+    [JsonIgnore]
     public string FullName
     {
       get { return FirstName + " " + LastName; }
@@ -21,6 +25,8 @@ namespace KnockoutMvcDemo.Models
     public int Value { get; set; }
 
     [Computed]
+    [ScriptIgnore]
+    [JsonIgnore]
     public string Message
     {
       get { return Caption + " = " + Value; }

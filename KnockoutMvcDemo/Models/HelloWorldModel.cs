@@ -1,4 +1,6 @@
-﻿using DelegateDecompiler;
+﻿using System.Web.Script.Serialization;
+using DelegateDecompiler;
+using Newtonsoft.Json;
 
 namespace KnockoutMvcDemo.Models
 {
@@ -8,6 +10,8 @@ namespace KnockoutMvcDemo.Models
     public string LastName { get; set; }
 
     [Computed]
+    [ScriptIgnore]
+    [JsonIgnore]
     public string FullName
     {
       get { return FirstName + " " + LastName; }

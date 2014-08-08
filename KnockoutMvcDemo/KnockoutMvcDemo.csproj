@@ -47,13 +47,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DelegateDecompiler, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DelegateDecompiler, Version=0.9.1.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DelegateDecompiler.0.6.0.0\lib\net40-Client\DelegateDecompiler.dll</HintPath>
+      <HintPath>..\packages\DelegateDecompiler.0.9.1.0\lib\net40-Client\DelegateDecompiler.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Reflection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Mono.Reflection.1.0.0.0\lib\Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
@@ -88,7 +92,6 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BetterListController.cs" />
     <Compile Include="Controllers\BigDataController.cs" />
-    <Compile Include="Controllers\CartEditorController.cs" />
     <Compile Include="Controllers\ClickCounterController.cs" />
     <Compile Include="Controllers\CombineContextController.cs" />
     <Compile Include="Controllers\ComplexBindingController.cs" />
@@ -108,7 +111,6 @@
     </Compile>
     <Compile Include="Models\BetterListModel.cs" />
     <Compile Include="Models\BigDataModel.cs" />
-    <Compile Include="Models\CartEditorModel.cs" />
     <Compile Include="Models\ClickCounterModel.cs" />
     <Compile Include="Models\CombineContextModel.cs" />
     <Compile Include="Models\ComplexBindingModel.cs" />
@@ -169,16 +171,16 @@
     <Content Include="Images\Screenshots\screens-intellisense.png" />
     <Content Include="Images\SharpShooterReportsWeb.jpg" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.8.2.js" />
-    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.form.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
-    <Content Include="Scripts\knockout-2.1.0.debug.js" />
-    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\knockout-3.1.0.debug.js" />
+    <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\perpetuum.knockout.js" />
@@ -207,7 +209,6 @@
     <Content Include="Views\UserScript\Index.cshtml" />
     <Content Include="Views\Collections\Index.cshtml" />
     <Content Include="Views\ContactsEditor\Index.cshtml" />
-    <Content Include="Views\CartEditor\Index.cshtml" />
     <Content Include="Views\CombineContext\Index.cshtml" />
     <Content Include="Views\InnerComputed\Index.cshtml" />
     <Content Include="Views\BigData\Index.cshtml" />
@@ -219,6 +220,7 @@
     <Content Include="Views\Home\ConceptTable3.cshtml" />
     <Content Include="Views\Home\Downloads.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PerpetuumSoft.Knockout\PerpetuumSoft.Knockout.csproj">

@@ -1,4 +1,6 @@
-﻿using DelegateDecompiler;
+﻿using System.Web.Script.Serialization;
+using DelegateDecompiler;
+using Newtonsoft.Json;
 
 namespace KnockoutMvcDemo.Models
 {
@@ -7,6 +9,8 @@ namespace KnockoutMvcDemo.Models
     public int NumberOfClicks { get; set; }
 
     [Computed]
+    [ScriptIgnore]
+    [JsonIgnore]
     public bool HasClickedTooManyTimes
     {
       get { return NumberOfClicks >= 3; }
