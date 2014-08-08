@@ -1,0 +1,7 @@
+﻿<p>If you have several View Models separated in partial Views and you want to use both in a main View 
+you can do this creating each context with a specific name like 
+<code>var ko = Html.CreateKnockoutContext("HelloWorldViewModel");</code>
+and applying only a specific container id for avoid viewmodel overwriting: 
+<code>&#64;ko.Apply(Model,"js-helloWorldViewModelWrapper")</code></p>
+
+<p>In this way you can have two different view models in the same View even if the view models has the same properties.</p>

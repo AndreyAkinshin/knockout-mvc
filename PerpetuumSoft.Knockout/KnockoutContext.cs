@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.Mvc;
 using System.Web;
-using System.Web.Routing;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace PerpetuumSoft.Knockout
 {
-  // interface IKnockoutContext
   public interface IKnockoutContext
   {
     string GetInstanceName();
@@ -18,9 +16,10 @@ namespace PerpetuumSoft.Knockout
 
   public class KnockoutContext<TModel> : IKnockoutContext
   {
-    public const string ViewModelName = "viewModel";
+    public string ViewModelName = "viewModel";
 
     private TModel model;
+
 
     public TModel Model
     {
@@ -42,7 +41,7 @@ namespace PerpetuumSoft.Knockout
 
     private bool isInitialized;
 
-    private string GetInitializeData(TModel model, bool needBinding, string rootName = null)
+    private string GetInitializeData(TModel model, bool needBinding, string wrapperId, bool applyOnDocumentReady)
     {
       if (isInitialized)
         return "";
@@ -55,6 +54,10 @@ namespace PerpetuumSoft.Knockout
       var json = JsonConvert.SerializeObject(model);
 
       sb.AppendLine(@"<script type=""text/javascript""> ");
+      if (applyOnDocumentReady)
+      {
+        sb.Append("$(document).ready(function() {");
+      }
       sb.AppendLine(string.Format("var {0}Js = {1};", ViewModelName, json));
       var mappingData = KnockoutJsModelBuilder.CreateMappingData<TModel>();
       if (mappingData == "{}")
@@ -68,17 +71,17 @@ namespace PerpetuumSoft.Knockout
       }
       sb.Append(KnockoutJsModelBuilder.AddComputedToModel(model, ViewModelName));
       if (needBinding)
-      {
-        
-        if(string.IsNullOrWhiteSpace(rootName))
+        if (!string.IsNullOrEmpty(wrapperId))
         {
-          sb.AppendLine(string.Format("ko.applyBindings({0});", ViewModelName));
+          sb.AppendLine(string.Format("ko.applyBindings({0}, document.getElementById('{1}'))", ViewModelName, wrapperId));
         }
         else
         {
-          sb.AppendLine(string.Format("ko.applyBindings({0}, {1});", ViewModelName, rootName));
+          sb.AppendLine(string.Format("ko.applyBindings({0});", ViewModelName));
         }
-        
+      if (applyOnDocumentReady)
+      {
+        sb.Append("});");
       }
       sb.AppendLine(@"</script>");
       return sb.ToString();
@@ -86,37 +89,43 @@ namespace PerpetuumSoft.Knockout
 
     public HtmlString Initialize(TModel model)
     {
-      return new HtmlString(GetInitializeData(model, false));
+      return new HtmlString(GetInitializeData(model, false, string.Empty, false));
     }
 
-    public HtmlString Apply(TModel model, string rootName = null)
+    public HtmlString Apply(TModel model, string wrapperId = "", bool applyOnDocumentReady = false)
     {
       if (isInitialized)
       {
         var sb = new StringBuilder();
         sb.AppendLine(@"<script type=""text/javascript"">");
-        if(string.IsNullOrWhiteSpace(rootName))
+        if (applyOnDocumentReady)
         {
-          sb.AppendLine(string.Format("ko.applyBindings({0});", ViewModelName));
+          sb.AppendLine("$(document).ready(function() {");
+        }
+        if (!string.IsNullOrEmpty(wrapperId))
+        {
+          sb.AppendLine(string.Format("ko.applyBindings({0}, document.getElementById('{1}'))", ViewModelName, wrapperId));
         }
         else
         {
-          sb.AppendLine(string.Format("ko.applyBindings({0}, {1});", ViewModelName, rootName));  
+          sb.AppendLine(string.Format("ko.applyBindings({0});", ViewModelName));
         }
-        
-        
+        if (applyOnDocumentReady)
+        {
+          sb.AppendLine("});");
+        }
         sb.AppendLine(@"</script>");
         return new HtmlString(sb.ToString());
       }
-      return new HtmlString(GetInitializeData(model, true));
+      return new HtmlString(GetInitializeData(model, true, wrapperId, applyOnDocumentReady));
     }
 
-    public HtmlString LazyApply(TModel model, string actionName, string controllerName, string rootName = null)
+    public HtmlString LazyApply(TModel model, string actionName, string controllerName, string wrapperId = "")
     {
       var sb = new StringBuilder();
 
       sb.AppendLine(@"<script type=""text/javascript""> ");
-      sb.Append("$(document).ready(function() {");
+      sb.AppendLine("$(document).ready(function() {");
 
       sb.AppendLine(string.Format("$.ajax({{ url: '{0}', type: 'POST', success: function (data) {{", Url().Action(actionName, controllerName)));
 
@@ -129,19 +138,18 @@ namespace PerpetuumSoft.Knockout
         sb.AppendLine(string.Format("var {0} = ko.mapping.fromJS(data, {0}MappingData); ", ViewModelName));
       }
       sb.Append(KnockoutJsModelBuilder.AddComputedToModel(model, ViewModelName));
-      
-      if(string.IsNullOrWhiteSpace(rootName))
+      if (!string.IsNullOrEmpty(wrapperId))
       {
-        sb.AppendLine(string.Format("ko.applyBindings({0});", ViewModelName));
+        sb.AppendLine(string.Format("ko.applyBindings({0}, document.getElementById('{1}'))", ViewModelName, wrapperId));
       }
       else
       {
-        sb.AppendLine(string.Format("ko.applyBindings({0}, {1});", ViewModelName, rootName));
+        sb.AppendLine(string.Format("ko.applyBindings({0});", ViewModelName));
       }
 
       sb.AppendLine("}, error: function (error) { alert('There was an error posting the data to the server: ' + error.responseText); } });");
 
-      sb.Append("});");
+      sb.AppendLine("});");
       sb.AppendLine(@"</script>");
 
       return new HtmlString(sb.ToString());
@@ -188,7 +196,7 @@ namespace PerpetuumSoft.Knockout
       switch (ActiveSubcontextCount)
       {
         case 0:
-	      return ContextStack.Count > 0 ? "$data" : "";;
+          return "";
         case 1:
           return "$parent";
         default:
