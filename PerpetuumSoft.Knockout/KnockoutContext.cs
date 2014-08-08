@@ -70,7 +70,7 @@ namespace PerpetuumSoft.Knockout
       if (needBinding)
       {
         
-        if(string.IsNullOrWhiteSpace(rootName) == null)
+        if(string.IsNullOrWhiteSpace(rootName))
         {
           sb.AppendLine(string.Format("ko.applyBindings({0});", ViewModelName));
         }
