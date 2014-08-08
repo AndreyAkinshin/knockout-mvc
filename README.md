@@ -6,11 +6,11 @@ Generated JavaScript code is based on Knockout.js and that is why it works under
 
 ##Getting Started
 * [Project homepage](http://knockoutmvc.com/)
+* [NuGet](http://www.nuget.org/packages/kMVC/)
 * [Introduction](http://knockoutmvc.com/Home/Introduction)
 * [QuickStart](http://knockoutmvc.com/Home/QuickStart)
 * [Documentation](http://knockoutmvc.com/Home/Documentation)
 * [Forum](https://groups.google.com/forum/#!forum/knockout-mvc)
-* [Roadmap](https://github.com/AndreyAkinshin/knockout-mvc/wiki/Roadmap)
 
 ##License
 MIT license - [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
