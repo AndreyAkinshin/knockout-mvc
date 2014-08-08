@@ -147,6 +147,12 @@ namespace PerpetuumSoft.Knockout
       return this;
     }
 
+    public KnockoutBinding<TModel> Attr(string name, string value)
+    {
+        ComplexItem("attr").Add(new KnockoutBindingStringItem(name, value, false));
+        return this;
+    }
+
     // *** Events ***
     protected virtual KnockoutBinding<TModel> Event(string eventName, string actionName, string controllerName, object routeValues)
     {

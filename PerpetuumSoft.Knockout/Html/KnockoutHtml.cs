@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace PerpetuumSoft.Knockout
 {
@@ -25,7 +26,12 @@ namespace PerpetuumSoft.Knockout
       if (!string.IsNullOrWhiteSpace(type))
         tagBuilder.ApplyAttributes(new { type });
       if (text != null)
-        tagBuilder.Value(text);
+      {
+          tagBuilder.Value(text);
+          var memberExpression = text.Body as MemberExpression;
+          if(memberExpression != null)
+              tagBuilder.ApplyAttributes(new { name = memberExpression.Member.Name });
+      }
       tagBuilder.TagRenderMode = TagRenderMode.SelfClosing;
       return tagBuilder;
     }

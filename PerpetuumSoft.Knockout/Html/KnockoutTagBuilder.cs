@@ -16,7 +16,9 @@ namespace PerpetuumSoft.Knockout
 
     public void ApplyAttributes(object htmlAttributes)
     {
-      ApplyAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+       var dictionaryAttributes = htmlAttributes as IDictionary<string, object>;
+       if (dictionaryAttributes == null) dictionaryAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+       ApplyAttributes(dictionaryAttributes);
     }
 
     public void ApplyAttributes(IDictionary<string, object> htmlAttributes)
