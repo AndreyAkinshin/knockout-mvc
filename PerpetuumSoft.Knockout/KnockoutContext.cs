@@ -196,7 +196,7 @@ namespace PerpetuumSoft.Knockout
       switch (ActiveSubcontextCount)
       {
         case 0:
-          return "";
+          return ContextStack.Count > 0 ? "$data" : "";;
         case 1:
           return "$parent";
         default:
