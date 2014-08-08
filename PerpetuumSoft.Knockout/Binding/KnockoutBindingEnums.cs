@@ -2,6 +2,6 @@
 {
   public enum KnockoutValueUpdateKind
   {
-    Change, KeyUp, KeyPress, AfterKeyDown
+    Change, KeyUp, KeyPress, AfterKeyDown, Input
   }
 }

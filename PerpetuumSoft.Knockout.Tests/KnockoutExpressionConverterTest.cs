@@ -183,5 +183,16 @@ namespace PerpetuumSoft.Knockout.Tests
         AssertStringEquivalent("text:(parseInt($data)+parseInt(1))", bind);
       }
     }
+
+    // valueUpdate: 'input'
+    [TestMethod]
+    public void ValueUpdateInput()
+    {
+        var viewContext = new ViewContext { Writer = new StringWriter() };
+        var context = new KnockoutContext<TestModel>(viewContext);
+        var binding = new KnockoutBinding<TestModel>(context);
+        string bind = context.Bind.Text(m => m.A).ValueUpdate(KnockoutValueUpdateKind.Input).BindingAttributeContent();
+        AssertStringEquivalent("text : A,valueUpdate : 'input'", bind);
+    }
   }
 }
