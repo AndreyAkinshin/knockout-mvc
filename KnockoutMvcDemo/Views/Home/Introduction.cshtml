@@ -6,51 +6,58 @@
   <h2>Introduction</h2>
   <article>
     <h3>Brief Overview</h3>
-    <p><a href="http://knockoutjs.com/documentation/introduction.html">Knockout.js</a>
+    <p>
+      <a href="http://knockoutjs.com/documentation/introduction.html">Knockout.js</a>
       - is a popular JavaScript library that allows easy creation of feature-rich applications
       based on <i>Model-View-View Model (MVVM) pattern</i>: user interface can be bound
       to a separate existing data model. And any change of the model will result in dynamic
-      refresh of the interface.</p>
-    <p><b>Knockout MVC</b> is a library for <a href="http://www.asp.net/mvc/mvc3">ASP.NET
+      refresh of the interface.
+    </p>
+    <p>
+      <b>Knockout MVC</b> is a library for <a href="http://www.asp.net/mvc/mvc3">ASP.NET
       MVC3</a>/<a href="http://www.asp.net/mvc/mvc4">MVC4</a> , that is a wrapper for Knockout.js, that helps to move entire business
       logic to the server side: the complete JavaScript code necessary on the client side
       will be generated automatically based on the described C# (or VB.NET) model. Binding
-      of the page interface to business model is done <a href="http://knockoutjs.com/documentation/observables.html#mvvm_and_view_models">
-        MVVM-style</a> with the help of C#/VB.NET expressions (not separate properties,
+      of the page interface to business model is done <a href="http://knockoutjs.com/documentation/observables.html#mvvm_and_view_models">MVVM-style</a> with the help of C#/VB.NET expressions (not separate properties,
       but expressions over them that will be translated to JavaScript code) using IntelliSense.
       If complex operations should be done to the model, it is possible to address to
       any model method on the server using one short string (ajax query will be automatically
       generated; and when the client will get the updated model, the whole interface will
-      automatically refresh).</p>
-    <p>Generated JavaScript code is based on Knockout.js and that is why it works under
+      automatically refresh).
+    </p>
+    <p>
+      Generated JavaScript code is based on Knockout.js and that is why it works under
       any browser <i>(even IE&nbsp;6)</i>. Thus, describing the whole business logic on
       the server in a single instance we get an ability to create <b>fully-featured cross-browser
-        client Web application without writing a single JavaScript code!</b></p>
+        client Web application without writing a single JavaScript code!</b>
+    </p>
   </article>
   <article>
     <h3>Compatibility</h3>
-    <p>Today, any serious application rarely uses only one library. And very often the
+    <p>
+      Today, any serious application rarely uses only one library. And very often the
       problem of libraries compatibility arises. Knockout MVC lacks this disadvantage.
       It is always possible to add your own native Knockout-code to the existing C# code
       (<a href="@Url.Action("Index", "UserScript")">example</a>). And Knockout itself
       greatly mates with any other libraries. Knockout.js doesn’t depend on any other
-      libraries; however its core hides various useful tools for work with <a href="http://www.prototypejs.org/">
-        jQuery</a> (that start working when it is connected). It is possible to use other
+      libraries; however its core hides various useful tools for work with <a href="http://www.prototypejs.org/">jQuery</a> (that start working when it is connected). It is possible to use other
       libraries (for example, <a href="http://www.prototypejs.org/">Prototype</a>), but
       is you use jQuery (as many other developers) you can use any jQuery plug-ins (for
       example, <a href="http://docs.jquery.com/Plugins/Validation">jQuery.Validation</a>,
-      <a href="@Url.Action("Index", "GiftList")">example</a>). You can use <a href="http://requirejs.org/">
-        RequireJs</a> (<a href="http://knockoutjs.com/documentation/amd-loading.html">example</a>)
-      to load big scripts.</p>
-    <p>Besides compatibility with third-party libraries, it’s worth to mention browser
+      <a href="@Url.Action("Index", "GiftList")">example</a>). You can use <a href="http://requirejs.org/">RequireJs</a> (<a href="http://knockoutjs.com/documentation/amd-loading.html">example</a>)
+      to load big scripts.
+    </p>
+    <p>
+      Besides compatibility with third-party libraries, it’s worth to mention browser
       compatibility: Knockout MVC is completely cross-browser (since it is based on Knockout.js)
       and works fine in IE&nbsp;6+, Firefox&nbsp;2+, Opera&nbsp;10+, Chrome, Safari. You
-      can get more information <a href="http://knockoutjs.com/documentation/browser-support.html">
-        here</a>.</p>
+      can get more information <a href="http://knockoutjs.com/documentation/browser-support.html">here</a>.
+    </p>
   </article>
   <article>
     <h3>Motivation</h3>
-    <p>Let’s consider the following popular task: we want to provide user with the ability
+    <p>
+      Let’s consider the following popular task: we want to provide user with the ability
       to edit some data model. And some data handler logic is hosted on the server (for
       example, saving to database). We want to use ajax to send requests to server in
       order to avoid page re-load. But using ajax results in the necessity to describe
@@ -58,7 +65,8 @@
       Besides, it is necessary to describe some part of data model processing on the client
       side using JavaScript in order to arrange good dynamic user interface (why refer
       to server each time user click a button). Let’s see what should be done to solve
-      this issue without using special libraries under ASP.NET.</p>
+      this issue without using special libraries under ASP.NET.
+    </p>
     <p><b>Solve without libraries under ASP.NET:</b></p>
     <ul>
       <li><i class="label label-bad">[JavaScript]</i> Describe data model on the client
@@ -81,15 +89,19 @@
       <li><i class="label label-bad">[JavaScript]</i> Describe logic of updating user interface
         elements according to new data</li>
     </ul>
-    <p>If the model quite small, these actions are quite obvious, but if you want to add
+    <p>
+      If the model quite small, these actions are quite obvious, but if you want to add
       new property or method to the model you will need to carefully write considerable
       amount of code. Pay attention to word “carefully” &mdash; you will need to move
       many names between different implementations of one and the same model from memory.
       As to refactoring, it’s very sad &mdash; our IDE can’t help us at all. If you just
       want to rename some item, you will need to edit it multiple locations, carefull
-      check complete code and entirely test it.</p>
-    <p>Don’t be so sad in advance &mdash; now you have a new wonderful library! Let’s
-      see what will be solution of our task with the use of Knockout MVC.</p>
+      check complete code and entirely test it.
+    </p>
+    <p>
+      Don’t be so sad in advance &mdash; now you have a new wonderful library! Let’s
+      see what will be solution of our task with the use of Knockout MVC.
+    </p>
     <p><b>Solve with Knockout MVC:</b></p>
     <ul>
       <li><i class="label label-good">[C#]</i> Describe data model and logic of its processing
@@ -97,41 +109,53 @@
       <li><i class="label label-good">[C#]</i> Specify what data model element corresponds
         to every interface element</li>
     </ul>
-    <p>That’s all! The rest of logic will be generated automatically! Refactoring of such
+    <p>
+      That’s all! The rest of logic will be generated automatically! Refactoring of such
       Web application won’t differ from refactoring of common C# application. You don’t
       need to remember name of any property or method – IntelliSence will help you write
       its name correctly. And even if there is an error, you will know it on the compilation
       stage. If some simple logic should be executed on both client side and server side
       (for example, validation of form fields), it is written in C# just once (then this
-      code will be converted to JavaScript).</p>
+      code will be converted to JavaScript).
+    </p>
   </article>
   <article>
     <h3>Simple Sample</h3>
-    <p>Now let’s have a look at syntax. All data bindings are described in the following
-      way:</p>
+    <p>
+      Now let’s have a look at syntax. All data bindings are described in the following
+      way:
+    </p>
     <pre class="prettyprint lang-cs">&#64;ko.Html.TextBox(m => m.A)</pre>
-    <p>As you can see, when creating data bindings we transmit an expression indicating
+    <p>
+      As you can see, when creating data bindings we transmit an expression indicating
       exact data model property we can bind to. As we do it in C#, we have fully-features
-      IntelliSense that will give us a clue about available properties and their types:</p>
+      IntelliSense that will give us a clue about available properties and their types:
+    </p>
     <img src="@Url.Content("~/Images/ScreenShots/screens-intellisense.png")" alt="screens-intellisense" style="border: 1px solid black"/>
     <p>As a result, these constructions will be transformed to html with Knockout code:</p>
     <pre class="prettyprint lang-html">&lt;input data-bind="value : A" /&gt;</pre>
-    <p>The following sample shows that we can create data bindings not only for common
+    <p>
+      The following sample shows that we can create data bindings not only for common
       objects and not only to specific properties, but to bind complex constructions to
       expressions (the first line is Razor code, the second line is html it is automatically
-      converted to):</p>
+      converted to):
+    </p>
     <pre class="prettyprint lang-cs">
 <span class="nocode">Razor: </span>&#64;using (ko.If(model => model.Condition1 &amp;&amp; model.Condition2))
 <span class="nocode">Html: &nbsp;</span>&lt;!-- ko if: Condition1()&amp;&amp;Condition2() --&gt;
 </pre>
-    <p>The complete list of syntax constructions that can be used is available in the
-      <a href="@Url.Action("Documentation", "Home")">documentation</a>.</p>
+    <p>
+      The complete list of syntax constructions that can be used is available in the
+      <a href="@Url.Action("Documentation", "Home")">documentation</a>.
+    </p>
   </article>
   <article>
     <h3>Other samples</h3>
-    <p>To get deeper understanding of the development process when using Knockout MVC,
+    <p>
+      To get deeper understanding of the development process when using Knockout MVC,
       we took some samples from the official site and re-wrote them in C#. Here is what
-      we got as a result:</p>
+      we got as a result:
+    </p>
     <table class="exampleTable">
       <tr>
         <th>Knockout.js</th>
@@ -203,16 +227,17 @@
       </tr>
       <tr>
         <td>
-          <a href="http://blog.stevensanderson.com/2010/07/12/editing-a-variable-length-list-knockout-style/">
-            Gift list</a>
+          <a href="http://blog.stevensanderson.com/2010/07/12/editing-a-variable-length-list-knockout-style/">Gift list</a>
         </td>
         <td>
           @Html.ActionLink("Gift list", "Index", "GiftList")
         </td>
       </tr>
     </table>
-    <p>Besides, there are a number of samples created to demonstrate some Knockout MVC
-      features:</p>
+    <p>
+      Besides, there are a number of samples created to demonstrate some Knockout MVC
+      features:
+    </p>
     <ul>
       <li>@Html.ActionLink("Region (if, foreach, with)", "Index", "Region")</li>
       <li>@Html.ActionLink("Complex bindings (style)", "Index", "ComplexBinding")</li>
@@ -225,8 +250,10 @@
   </article>
   <article>
     <h3>License</h3>
-    <p>The Knockout MVC is currently available for use in all personal or commercial projects
-      under <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
+    <p>
+      The Knockout MVC is currently available for use in all personal or commercial projects
+      under <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.
+    </p>
   </article>
   <article>
     <h3>Resume</h3>
@@ -236,22 +263,21 @@
   </article>
 </div>
 <style scoped="scoped">
-  .exampleTable
-  {
+  .exampleTable {
     border-spacing: 5px;
     text-align: center;
   }
-  .exampleTable td
-  {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .label-good
-  {
+
+    .exampleTable td {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+  .label-good {
     background-color: #468847;
   }
-  .label-bad
-  {
+
+  .label-bad {
     background-color: #b94a48;
   }
 </style>

@@ -4,26 +4,26 @@ using KnockoutMvcDemo.Models;
 
 namespace KnockoutMvcDemo.Controllers
 {
-  public class InnerComputedController : BaseController
-  {
-    public ActionResult Index()
+    public class InnerComputedController : BaseController
     {
-      InitializeViewBag("Inner computed properties");
-      var model = new InnerComputedModel
+        public ActionResult Index()
         {
-          Items = new List<InnerComputedItemModel>
+            InitializeViewBag("Inner computed properties");
+            var model = new InnerComputedModel
+              {
+                  Items = new List<InnerComputedItemModel>
             {
               new InnerComputedItemModel {FirstName = "Annabelle", LastName = "Arnie"},
               new InnerComputedItemModel {FirstName = "Bertie", LastName = "Brianna"},
               new InnerComputedItemModel {FirstName = "Charles", LastName = "Cayenne"},
             },
-          SubModel = new InnerComputedSubModel
-            {
-              Caption = "Count",
-              Value = 3
-            }
-        };
-      return View(model);
+                  SubModel = new InnerComputedSubModel
+                    {
+                        Caption = "Count",
+                        Value = 3
+                    }
+              };
+            return View(model);
+        }
     }
-  }
 }

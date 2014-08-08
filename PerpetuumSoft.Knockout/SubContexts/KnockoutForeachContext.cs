@@ -2,18 +2,19 @@
 
 namespace PerpetuumSoft.Knockout
 {
-  public class KnockoutForeachContext<TModel> : KnockoutCommonRegionContext<TModel>
-  {
-    public KnockoutForeachContext(ViewContext viewContext, string expression) : base(viewContext, expression)
+    public class KnockoutForeachContext<TModel> : KnockoutCommonRegionContext<TModel>
     {
-    }
+        public KnockoutForeachContext(ViewContext viewContext, string expression)
+            : base(viewContext, expression)
+        {
+        }
 
-    protected override string Keyword
-    {
-      get
-      {
-        return "foreach";
-      }
+        protected override string Keyword
+        {
+            get
+            {
+                return "foreach";
+            }
+        }
     }
-  }
 }

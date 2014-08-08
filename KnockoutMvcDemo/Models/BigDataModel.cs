@@ -4,19 +4,19 @@ using System.Threading;
 
 namespace KnockoutMvcDemo.Models
 {
-  public class BigDataModel
-  {
-    public string Key { get; set; }
-    public List<int> Items { get; set; }
-
-    public void LoadData()
+    public class BigDataModel
     {
-      Key = "Key " + new Random().Next();
-      Items = new List<int>();
-      for (int i = 0; i < 100; i++)
-        Items.Add(i);      
+        public string Key { get; set; }
+        public List<int> Items { get; set; }
 
-      Thread.Sleep(2000);
+        public void LoadData()
+        {
+            Key = "Key " + new Random().Next();
+            Items = new List<int>();
+            for (int i = 0; i < 100; i++)
+                Items.Add(i);
+
+            Thread.Sleep(2000);
+        }
     }
-  }
 }

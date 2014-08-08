@@ -3,18 +3,18 @@ using KnockoutMvcDemo.Models;
 
 namespace KnockoutMvcDemo.Controllers
 {
-  public class BigDataController : BaseController
-  {
-    public ActionResult Index()
+    public class BigDataController : BaseController
     {
-      InitializeViewBag("Big data");
-      return View();
-    }
+        public ActionResult Index()
+        {
+            InitializeViewBag("Big data");
+            return View();
+        }
 
-    public ActionResult InitialData(BigDataModel model)
-    {
-      model.LoadData();
-      return Json(model);
+        public ActionResult InitialData(BigDataModel model)
+        {
+            model.LoadData();
+            return Json(model);
+        }
     }
-  }
 }

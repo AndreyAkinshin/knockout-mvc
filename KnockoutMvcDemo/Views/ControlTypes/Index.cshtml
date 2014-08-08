@@ -30,7 +30,8 @@
         </tr>
         <tr>
           <td>Drop-down list:</td>
-          <td><select @ko.Bind.Options(m => m.OptionValue).Value(m => m.SelectedOptionValue)></select></td>
+          <td>
+            <select @ko.Bind.Options(m => m.OptionValue).Value(m => m.SelectedOptionValue)></select></td>
         </tr>
         <tr>
           <td>Multi-select drop-down list:</td>
@@ -78,15 +79,14 @@
   </tr>
 </table>
 <style scoped="scoped">
-  #maintable
-  {
+  #maintable {
     border-collapse: separate;
     border-spacing: 15px;
   }
-  #maintable td
-  {
-    vertical-align: top;
-  }
+
+    #maintable td {
+      vertical-align: top;
+    }
 </style>
 
 @ko.Apply(Model)

@@ -2,18 +2,19 @@
 
 namespace PerpetuumSoft.Knockout
 {
-  public class KnockoutWithContext<TModel> : KnockoutCommonRegionContext<TModel>
-  {
-    public KnockoutWithContext(ViewContext viewContext, string expression) : base(viewContext, expression)
+    public class KnockoutWithContext<TModel> : KnockoutCommonRegionContext<TModel>
     {
-    }
+        public KnockoutWithContext(ViewContext viewContext, string expression)
+            : base(viewContext, expression)
+        {
+        }
 
-    protected override string Keyword
-    {
-      get
-      {
-        return "with";
-      }
+        protected override string Keyword
+        {
+            get
+            {
+                return "with";
+            }
+        }
     }
-  }
 }

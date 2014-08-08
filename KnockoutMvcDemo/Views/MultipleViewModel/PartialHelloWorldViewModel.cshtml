@@ -1,12 +1,12 @@
 ﻿@using PerpetuumSoft.Knockout
 @model KnockoutMvcDemo.Models.HelloWorldModel           
 @{
-    var ko = Html.CreateKnockoutContext("HelloWorldViewModel");
+  var ko = Html.CreateKnockoutContext("HelloWorldViewModel");
 }
 <div id="js-helloWorldViewModelWrapper">
-    <p>First name: @ko.Html.TextBox(m => m.FirstName)</p>
-    <p>Last name: @ko.Html.TextBox(m => m.LastName)</p>
-    <h2>Hello, @ko.Html.Span(m => m.FullName)!</h2>
+  <p>First name: @ko.Html.TextBox(m => m.FirstName)</p>
+  <p>Last name: @ko.Html.TextBox(m => m.LastName)</p>
+  <h2>Hello, @ko.Html.Span(m => m.FullName)!</h2>
 </div>
 
-@ko.Apply(Model,"js-helloWorldViewModelWrapper")
+@ko.Apply(Model, "js-helloWorldViewModelWrapper")

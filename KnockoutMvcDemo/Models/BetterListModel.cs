@@ -2,28 +2,28 @@
 
 namespace KnockoutMvcDemo.Models
 {
-  public class BetterListModel
-  {
-    public string ItemToAdd { get; set; }
-    public List<string> AllItems { get; set; }
-    public List<string> SelectedItems { get; set; }
-
-    public void AddItem()
+    public class BetterListModel
     {
-      if (!string.IsNullOrEmpty(ItemToAdd) && !AllItems.Contains(ItemToAdd))
-        AllItems.Add(ItemToAdd);
-      ItemToAdd = "";
-    }
+        public string ItemToAdd { get; set; }
+        public List<string> AllItems { get; set; }
+        public List<string> SelectedItems { get; set; }
 
-    public void RemoveSelected()
-    {
-      AllItems.RemoveAll(item => SelectedItems.Contains(item));
-      SelectedItems.Clear();      
-    }
+        public void AddItem()
+        {
+            if (!string.IsNullOrEmpty(ItemToAdd) && !AllItems.Contains(ItemToAdd))
+                AllItems.Add(ItemToAdd);
+            ItemToAdd = "";
+        }
 
-    public void SortItems()
-    {
-      AllItems.Sort();
+        public void RemoveSelected()
+        {
+            AllItems.RemoveAll(item => SelectedItems.Contains(item));
+            SelectedItems.Clear();
+        }
+
+        public void SortItems()
+        {
+            AllItems.Sort();
+        }
     }
-  }
 }

@@ -3,7 +3,8 @@
 @{
   var ko = Html.CreateKnockoutContext();
 }
-Message: @ko.Html.TextBox(m => m.Message) <br />
+Message: @ko.Html.TextBox(m => m.Message)
+<br />
 @ko.Html.Button("Add letter", "AddLetter", "UserScript")
 <button data-bind="click: reverse">Reverse</button>
 

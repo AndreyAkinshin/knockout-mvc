@@ -2,15 +2,15 @@
 
 namespace KnockoutMvcDemo.Models
 {
-  public class SimpleListModel
-  {
-    public string ItemToAdd { get; set; }
-    public List<string> Items { get; set; }
-
-    public void AddItem()
+    public class SimpleListModel
     {
-      Items.Add(ItemToAdd);
-      ItemToAdd = "";
+        public string ItemToAdd { get; set; }
+        public List<string> Items { get; set; }
+
+        public void AddItem()
+        {
+            Items.Add(ItemToAdd);
+            ItemToAdd = "";
+        }
     }
-  }
 }

@@ -8,7 +8,7 @@
 {
   using (var subItems = items.Foreach(m => m.SubItems))
   {
-    @subItems.Html.Span(m => ko.Model.Key + " " + items.Model.Caption + " " + m.Name)<br />
+  @subItems.Html.Span(m => ko.Model.Key + " " + items.Model.Caption + " " + m.Name)<br />
   }
 }
 

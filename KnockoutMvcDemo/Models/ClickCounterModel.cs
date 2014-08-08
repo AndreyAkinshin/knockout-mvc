@@ -4,26 +4,26 @@ using Newtonsoft.Json;
 
 namespace KnockoutMvcDemo.Models
 {
-  public class ClickCounterModel
-  {
-    public int NumberOfClicks { get; set; }
-
-    [Computed]
-    [ScriptIgnore]
-    [JsonIgnore]
-    public bool HasClickedTooManyTimes
+    public class ClickCounterModel
     {
-      get { return NumberOfClicks >= 3; }
-    }
+        public int NumberOfClicks { get; set; }
 
-    public void RegisterClick()
-    {
-      NumberOfClicks++;
-    }
+        [Computed]
+        [ScriptIgnore]
+        [JsonIgnore]
+        public bool HasClickedTooManyTimes
+        {
+            get { return NumberOfClicks >= 3; }
+        }
 
-    public void ResetClicks()
-    {
-      NumberOfClicks = 0;
+        public void RegisterClick()
+        {
+            NumberOfClicks++;
+        }
+
+        public void ResetClicks()
+        {
+            NumberOfClicks = 0;
+        }
     }
-  }
 }

@@ -14,15 +14,21 @@
 <h2>Documentation</h2>
 <article id="context">
   <h3>Working with KnockoutContext</h3>
-  <p>Main object of forming View is instance of the <code>KnockoutContext</code> class.
-    It is necessary to create it in the beginning of the view using the following line:</p>
+  <p>
+    Main object of forming View is instance of the <code>KnockoutContext</code> class.
+    It is necessary to create it in the beginning of the view using the following line:
+  </p>
   <pre class="prettyprint lang-cs">var ko = Html.CreateKnockoutContext();</pre>
-  <p>At the end of view, it is necessary to apply the formed data binding. You can do
-    it in the following way:</p>
+  <p>
+    At the end of view, it is necessary to apply the formed data binding. You can do
+    it in the following way:
+  </p>
   <pre class="prettyprint lang-cs">&#64;ko.Apply(Model)</pre>
-  <p>If you have much data and need some time to load it, it makes sense to use lazy
+  <p>
+    If you have much data and need some time to load it, it makes sense to use lazy
     analogue (in this case a page will load first, and then additional ajax query will
-    load all data):</p>
+    load all data):
+  </p>
   <pre class="prettyprint lang-cs">&#64;ko.LazyApply(Model, "GetDataAction", "ControllerName")</pre>
   <p>So, common view template looks in the following way:</p>
   <pre class="prettyprint lang-cs">
@@ -38,10 +44,12 @@
 </article>
 <article id="binding">
   <h3>Basic data binding</h3>
-  <p>It is possible to bind data using <code>ko.Bind</code>.Lambda expressions that
+  <p>
+    It is possible to bind data using <code>ko.Bind</code>.Lambda expressions that
     view the initial model as some its property or expression are passed to the methods
     of this object. Here and further in the documentation we will use source Razor constructions
-    and then show resulting html they are converted to:</p>
+    and then show resulting html they are converted to:
+  </p>
   <pre class="prettyprint lang-cs">
 <span class="nocode">Razor: </span>&lt;span &#64;ko.Bind.Text(m => m.MyText)&gt;
 <span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text: MyText"&gt;
@@ -51,8 +59,10 @@
 <span class="nocode">Razor: </span>&lt;span &#64;ko.Bind.Text(m => m.MyText).Visible(m => m.MyVisible).Style("fontSize", m => m.MyFontSize)&gt;
 <span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text: MyText, visible: MyVisible, style: {fontSize : MyFontSize}"&gt;
 </pre>
-  <p>You can define the following properties using data bindings (every property features
-    reference to its official Knockout specification):</p>
+  <p>
+    You can define the following properties using data bindings (every property features
+    reference to its official Knockout specification):
+  </p>
   <ul>
     <li><code>Visible</code> (<a href="http://knockoutjs.com/documentation/visible-binding.html">Knockout</a>)
       <pre class="prettyprint lang-cs">
@@ -312,8 +322,10 @@
 </article>
 <article id="advanced">
   <h3>Nested contexts</h3>
-  <p>Nested contexts allows developers to wrap a part of view in a special construction
-    offering some additional behavior.</p>
+  <p>
+    Nested contexts allows developers to wrap a part of view in a special construction
+    offering some additional behavior.
+  </p>
   <p>It is possible to create the following types of nested contexts:</p>
   <ul>
     <li><code>Foreach</code> (<a href="http://knockoutjs.com/documentation/foreach-binding.html">Knockout</a>)
@@ -371,8 +383,10 @@
 </article>
 <article>
   <h3>Sending requests to server</h3>
-  <p>It is assumed that main logic of model processing is hosted on the server. Every
-    action we perform on the model should correspond to method in the controller:</p>
+  <p>
+    It is assumed that main logic of model processing is hosted on the server. Every
+    action we perform on the model should correspond to method in the controller:
+  </p>
   <pre class="prettyprint lang-cs">
 public class FooController : KnockoutController {
   public ActionResult FooAction(FooModel model)
@@ -382,13 +396,15 @@ public class FooController : KnockoutController {
   }
 }
 </pre>
-  <p>As you see from the sample, method can take <code>model</code> parameter to which
+  <p>
+    As you see from the sample, method can take <code>model</code> parameter to which
     the main model sent from the client side will map. In other words, <code>model</code>
     parameter contains status of the client model as of the moment the request is sent.
     It is possible to perform necessary manipulations over the model and then send the
     updated model in JSON format with the help of <code>return Json(model);</code>.
     Pay attention to the fact that base class for the controller is <code>KnockoutController</code>.
-    This base class contains extended logic for work with JSON format.</p>
+    This base class contains extended logic for work with JSON format.
+  </p>
   <p>You can create a special control to send requests to server:</p>
   <pre class="prettyprint lang-cs">
 <span class="nocode">Razor: </span>&#64;ko.Html.Button("Display", "FooAction", "Foo")
@@ -449,31 +465,43 @@ public class FooController : KnockoutController {
   }      
 &lt;/script&gt;
 </pre>
-  <p>Please review the following sample to get more information on this ability:
-    @Html.ActionLink("Parameters to server", "Index", "ParametersToServer").</p>
+  <p>
+    Please review the following sample to get more information on this ability:
+    @Html.ActionLink("Parameters to server", "Index", "ParametersToServer").
+  </p>
 </article>
 <article>
   <h3>Adding user-defined scripts</h3>
-  <p>If necessary, you can add your own knockout code to the one generated automatically.
-    It is necessary to initialize generated model by the following code:</p>
+  <p>
+    If necessary, you can add your own knockout code to the one generated automatically.
+    It is necessary to initialize generated model by the following code:
+  </p>
   <pre class="prettyprint lang-cs">&#64;ko.Initialize(Model)</pre>
-  <p>This line will create a model named <code>viewModel</code> and fill it with data
+  <p>
+    This line will create a model named <code>viewModel</code> and fill it with data
     taken from the <code>Model</code>parameter that is defined by the standard C# code.
-    Then you can add custom JavaScriptcode and extend a model:</p>
+    Then you can add custom JavaScriptcode and extend a model:
+  </p>
   <pre class="prettyprint lang-html">
 &lt;script type="text/javascript"&gt;
   viewModel.someProperty = someValue;  
 &lt;/script&gt;</pre>
-  <p>After necessary custom script is added it is necessary to activate Knockout and
-    display model in the view using the following code:</p>
+  <p>
+    After necessary custom script is added it is necessary to activate Knockout and
+    display model in the view using the following code:
+  </p>
   <pre class="prettyprint lang-cs">&#64;ko.Apply(Model)</pre>
-  <p>For more detailed information of this feature please review this sample
-    @Html.ActionLink("User script", "Index", "UserScript").</p>
+  <p>
+    For more detailed information of this feature please review this sample
+    @Html.ActionLink("User script", "Index", "UserScript").
+  </p>
 </article>
 <article>
   <h3>Forming model and using computed properties</h3>
-  <p>Besides binding interface elements to definite model properties, you can bind
-    to expressions. Samples:</p>
+  <p>
+    Besides binding interface elements to definite model properties, you can bind
+    to expressions. Samples:
+  </p>
   <pre class="prettyprint lang-cs">
 <span class="nocode">Razor: </span>&lt;button type="submit" &#64;ko.Bind.Enable(m => m.StringValue.Length &gt; 0)&gt;Add&lt;/button&gt;
 <span class="nocode">Html: &nbsp;</span>&lt;button type="submit" data-bind="enable : StringValue().length&gt;0"&gt;Add&lt;/button&gt;
@@ -490,17 +518,20 @@ public class FooController : KnockoutController {
 <span class="nocode">Razor: </span>&#64;ko.Html.Span(m => m.Price).Style("color", m => m.Price &gt; 0 ? "black" : "red")
 <span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text : Price,style : {color : Price()>0 ? &#39;black&#39; : &#39;red&#39;}"&gt;&lt;/span&gt;
 </pre>
-  <p>In addition, computed properties can be created directly as model part (review
+  <p>
+    In addition, computed properties can be created directly as model part (review
     @Html.ActionLink("Hello world", "Index", "HelloWorld") and @Html.ActionLink("Inner computed properties", "Index", "InnerComputed"))
-    samples:</p>
+    samples:
+  </p>
   <pre class="prettyprint lang-cs">
 <span class="nocode">Razor: </span>public Expression&lt;Func&lt;string&gt;&gt; FullName() { return () => FirstName + " " + LastName; }
 <span class="nocode">Html: &nbsp;</span>viewModel.FullName = ko.computed(function() { try { return this.FirstName()+' '+this.LastName()} catch(e) { return null; }  ;}, viewModel);
 </pre>
-  <p>As you see from the sample, standard <code>viewModel</code> model will be extended
-    with a special <a href="http://knockoutjs.com/documentation/computedObservables.html">
-      computed</a>-property. Advantage of such approach is that the declared method
-    can be used not only on server side, but also as data binding on client side:</p>
+  <p>
+    As you see from the sample, standard <code>viewModel</code> model will be extended
+    with a special <a href="http://knockoutjs.com/documentation/computedObservables.html">computed</a>-property. Advantage of such approach is that the declared method
+    can be used not only on server side, but also as data binding on client side:
+  </p>
   <pre class="prettyprint lang-cs">
 <span class="nocode">Razor: </span>&#64;ko.Html.Span(m => m.FullName())
 <span class="nocode">Html: &nbsp;</span>&lt;span data-bind="text : FullName"&gt;&lt;/span&gt;
@@ -508,12 +539,14 @@ public class FooController : KnockoutController {
   <p>@Html.ActionLink("Inner computed properties", "Index", "InnerComputed")
     sample shows that nested properties can be described not only for main model, but
     also for sub-models (if you use pure Knockout.js you need to write some sophisticated
-    code, but when you use Knockout MVC no such problem arises).</p>
+    code, but when you use Knockout MVC no such problem arises).
+  </p>
 </article>
 <article>
   <h3>Special addressing forms: $parent, $data, $index и т.д.</h3>
-  <p>When you use Knockout.js you have to use some <a href="http://knockoutjs.com/documentation/binding-context.html">
-    specific keywords</a>. Let’s review their Knockout MVC analogue:</p>
+  <p>
+    When you use Knockout.js you have to use some <a href="http://knockoutjs.com/documentation/binding-context.html">specific keywords</a>. Let’s review their Knockout MVC analogue:
+  </p>
   <ul>
     <li><code>$parent</code>, <code>$parents</code>, <code>$root</code>, <code>$parentContext</code>
       &mdash; these properties allowed access to different data binding contexts. Using
@@ -565,13 +598,12 @@ public class FooController : KnockoutController {
   </ul>
 </article>
 <style scoped="scoped">
-  .lang-cs
-  {
+  .lang-cs {
   }
-  .lang-html
-  {
+
+  .lang-html {
   }
-  .nocode
-  {
+
+  .nocode {
   }
 </style>

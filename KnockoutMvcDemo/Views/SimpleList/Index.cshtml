@@ -10,9 +10,9 @@
   <button type="submit" @ko.Bind.Enable(m => m.ItemToAdd.Length > 0)>Add</button>
   <p>Your items:</p>
   @ko.Html.ListBox(m => m.Items, new { width = 50, size = 7 })  
-}  
-<script type="text/javascript">      
-    $('#myform').ajaxForm();
-</script> 
+}
+<script type="text/javascript">
+  $('#myform').ajaxForm();
+</script>
 
 @ko.Apply(Model)

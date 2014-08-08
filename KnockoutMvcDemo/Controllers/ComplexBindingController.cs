@@ -3,17 +3,17 @@ using KnockoutMvcDemo.Models;
 
 namespace KnockoutMvcDemo.Controllers
 {
-  public class ComplexBindingController : BaseController
-  {
-    public ActionResult Index()
+    public class ComplexBindingController : BaseController
     {
-      InitializeViewBag("Complex binding");
-      var model = new ComplexBindingModel
-      {
-        Price = -10,
-        FontSize = "20px"
-      };
-      return View(model);
+        public ActionResult Index()
+        {
+            InitializeViewBag("Complex binding");
+            var model = new ComplexBindingModel
+            {
+                Price = -10,
+                FontSize = "20px"
+            };
+            return View(model);
+        }
     }
-  }
 }

@@ -4,15 +4,15 @@ using KnockoutMvcDemo.Models;
 
 namespace KnockoutMvcDemo.Controllers
 {
-  public class CombineContextController : BaseController
-  {
-    public ActionResult Index()
+    public class CombineContextController : BaseController
     {
-      InitializeViewBag("Combine context");
-      var model = new CombineContextModel
+        public ActionResult Index()
         {
-          Key = "Global",
-          Items = new List<CombineContextItemModel>
+            InitializeViewBag("Combine context");
+            var model = new CombineContextModel
+              {
+                  Key = "Global",
+                  Items = new List<CombineContextItemModel>
             {
               new CombineContextItemModel
                 {
@@ -35,8 +35,8 @@ namespace KnockoutMvcDemo.Controllers
                     }
                 }
             }
-        };
-      return View(model);
+              };
+            return View(model);
+        }
     }
-  }
 }

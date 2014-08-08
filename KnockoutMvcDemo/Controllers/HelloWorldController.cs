@@ -3,16 +3,16 @@ using KnockoutMvcDemo.Models;
 
 namespace KnockoutMvcDemo.Controllers
 {
-  public class HelloWorldController : BaseController
-  {
-    public ActionResult Index()
+    public class HelloWorldController : BaseController
     {
-      InitializeViewBag("Hello world");
-      return View(new HelloWorldModel
-      {
-        FirstName = "Steve",
-        LastName = "Sanderson"
-      });
+        public ActionResult Index()
+        {
+            InitializeViewBag("Hello world");
+            return View(new HelloWorldModel
+            {
+                FirstName = "Steve",
+                LastName = "Sanderson"
+            });
+        }
     }
-  }
 }
