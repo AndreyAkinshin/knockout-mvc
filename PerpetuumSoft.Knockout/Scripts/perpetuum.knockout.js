@@ -1,6 +1,8 @@
 ﻿executeOnServer = function (model, url) {
-
-    $.ajax({
+  executeOnServer(model, url, null);
+}
+executeOnServer = function (model, url, completeFunction) {
+﻿    $.ajax({
         url: url,
         type: 'POST',
         data: ko.mapping.toJSON(model),
@@ -16,7 +18,8 @@
         },
         error: function (error) {
             alert("There was an error posting the data to the server: " + error.responseText);
-        }
+        },
+        complete : completeFunction
     });
 
 };
