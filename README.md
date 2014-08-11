@@ -11,6 +11,7 @@ Generated JavaScript code is based on Knockout.js and that is why it works under
 * [QuickStart](http://knockoutmvc.com/Home/QuickStart)
 * [Documentation](http://knockoutmvc.com/Home/Documentation)
 * [Forum](https://groups.google.com/forum/#!forum/knockout-mvc)
+* [Release notes](ReleaseNotes.md)
 
 ##License
 MIT license - [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>kMVC</id>
-        <version>0.5.4</version>
+        <version>0.6.0</version>
         <title>Knockout MVC</title>
         <authors>Perpetuum Software LLC</authors>
         <owners>Perpetuum Software LLC</owners>
@@ -19,11 +19,11 @@ Generated JavaScript code is based on Knockout.js and that is why it works under
         <copyright>Perpetuum Software LLC</copyright>
         <language>en-US</language>
         <dependencies>
-            <dependency id="knockoutjs" version="2.1.0" />
-            <dependency id="Knockout.Mapping" version="2.3.2" />
-            <dependency id="DelegateDecompiler" version="0.6.0.0" />
-            <dependency id="Newtonsoft.Json" version="4.5.11" />
-            <dependency id="jQuery" version="1.7" />
+            <dependency id="knockoutjs" version="3.1.0" />
+            <dependency id="Knockout.Mapping" version="2.4.0" />
+            <dependency id="DelegateDecompiler" version="0.9.1.0" />
+            <dependency id="Newtonsoft.Json" version="6.0.4" />
+            <dependency id="jQuery" version="2.1.1" />
         </dependencies>
         <references>
             <reference file="PerpetuumSoft.Knockout.dll" />
