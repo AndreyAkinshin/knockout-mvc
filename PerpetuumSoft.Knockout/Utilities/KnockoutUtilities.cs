@@ -27,6 +27,8 @@ namespace PerpetuumSoft.Knockout
                 type = type.BaseType;
             foreach (var property in type.GetProperties())
             {
+                if (property.GetGetMethod().IsStatic && property.PropertyType == property.DeclaringType)
+                    continue;
                 if (property.GetCustomAttributes(typeof(Newtonsoft.Json.JsonIgnoreAttribute), false).Length > 0)
                     continue;
                 if (property.GetGetMethod() == null)

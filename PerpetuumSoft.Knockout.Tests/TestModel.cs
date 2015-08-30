@@ -21,6 +21,8 @@ namespace PerpetuumSoft.Knockout.Tests
 
         public TestModel SubModel { get; set; }
 
+        public static TestModel StaticReferenceModel { get { return new TestModel(); } }
+
         [ScriptIgnore]
         public Expression<Func<string>> Concatenation
         {
