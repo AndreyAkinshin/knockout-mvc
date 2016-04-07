@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerpetuumSoft.Knockout", "PerpetuumSoft.Knockout\PerpetuumSoft.Knockout.csproj", "{25C6EE67-C272-4B3C-83BD-CEC6EFAC7AE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutMvcDemo", "KnockoutMvcDemo\KnockoutMvcDemo.csproj", "{8C24ECDE-045D-4487-8BFB-ACA46E6A0A7E}"
@@ -8,9 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerpetuumSoft.Knockout.Tests", "PerpetuumSoft.Knockout.Tests\PerpetuumSoft.Knockout.Tests.csproj", "{6E436C20-331A-4705-A8F0-FA95EFEB342E}"
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = KnockoutIntegration.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -53,5 +52,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = KnockoutIntegration.vsmdi
 	EndGlobalSection
 EndGlobal
