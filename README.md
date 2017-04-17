@@ -4,7 +4,7 @@
 
 Generated JavaScript code is based on Knockout.js and that is why it works under any browser (even IE 6). Thus, describing the whole business logic on the server in a single instance we get an ability to create **fully-featured cross-browser client Web application without writing a single JavaScript code!**
 
-##Getting Started
+## Getting Started
 * [Project homepage](http://knockoutmvc.com/)
 * [NuGet](http://www.nuget.org/packages/kMVC/)
 * [Introduction](http://knockoutmvc.com/Home/Introduction)
@@ -13,8 +13,8 @@ Generated JavaScript code is based on Knockout.js and that is why it works under
 * [Forum](https://groups.google.com/forum/#!forum/knockout-mvc)
 * [Release notes](ReleaseNotes.md)
 
-##License
+## License
 MIT license - [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
 
-##Copyright
+## Copyright
 [© 2012–2014 Perpetuum Software LLC](http://www.perpetuumsoft.com/)
